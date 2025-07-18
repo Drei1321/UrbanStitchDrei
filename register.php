@@ -5,11 +5,11 @@ session_start();
 $phpmailer_available = false;
 
 // Check if PHPMailer files exist
-if (file_exists('C:\Users\jopet\OneDrive\Desktop\xmpp\PHPMailer\PHPMailer\src\PHPMailer.php')) {
+if (file_exists('PHPMailer/PHPMailer/src/PHPMailer.php')) {
     try {
-        require_once 'PHPMailer\PHPMailer\src\PHPMailer.php';
-        require_once 'PHPMailer\PHPMailer\src\SMTP.php';
-        require_once 'PHPMailer\PHPMailer\src\Exception.php';
+        require_once 'PHPMailer/PHPMailer/src/PHPMailer.php';
+        require_once 'PHPMailer/PHPMailer/src/SMTP.php';
+        require_once 'PHPMailer/PHPMailer/src/Exception.php';
         $phpmailer_available = true;
     } catch (Exception $e) {
         error_log("PHPMailer loading failed: " . $e->getMessage());
