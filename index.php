@@ -13,6 +13,7 @@ if (isset($_GET['ajax'])) {
         exit;
     }
     
+    
     $userId = $_SESSION['user_id'];
     
     switch ($action) {
