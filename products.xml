@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urbanstitch_data xmlns="http://urbanstitch.com/products" version="1.0" generated="2025-07-06T12:00:00Z">
+    
+    <!-- Categories Definition -->
+    <categories>
+        <category id="1" slug="urban-tees">
+            <name>Urban Tees</name>
+            <icon>fas fa-tshirt</icon>
+            <color>text-neon-green</color>
+            <description>Premium urban t-shirts and hoodies for street fashion enthusiasts</description>
+            <product_count>2</product_count>
+        </category>
+        <category id="2" slug="winter-wear">
+            <name>Winter Wear</name>
+            <icon>fas fa-snowflake</icon>
+            <color>text-urban-orange</color>
+            <description>Stay warm and stylish with our winter collection</description>
+            <product_count>1</product_count>
+        </category>
+        <category id="3" slug="glasses-lens">
+            <name>Glasses &amp; Lens</name>
+            <icon>fas fa-glasses</icon>
+            <color>text-neon-green</color>
+            <description>Trendy sunglasses and eyewear for the modern urbanite</description>
+            <product_count>1</product_count>
+        </category>
+        <category id="4" slug="shorts-jeans">
+            <name>Shorts &amp; Jeans</name>
+            <icon>fas fa-user-tie</icon>
+            <color>text-urban-orange</color>
+            <description>Comfortable and stylish bottoms for everyday wear</description>
+            <product_count>1</product_count>
+        </category>
+        <category id="5" slug="streetwear">
+            <name>Streetwear</name>
+            <icon>fas fa-tshirt</icon>
+            <color>text-neon-green</color>
+            <description>Authentic street fashion pieces that define urban culture</description>
+            <product_count>2</product_count>
+        </category>
+        <category id="6" slug="footwear">
+            <name>Footwear</name>
+            <icon>fas fa-shoe-prints</icon>
+            <color>text-urban-orange</color>
+            <description>Urban sneakers and shoes for every street style</description>
+            <product_count>3</product_count>
+        </category>
+        <category id="7" slug="accessories">
+            <name>Accessories</name>
+            <icon>fas fa-sunglasses</icon>
+            <color>text-blue</color>
+            <description>Complete your look with our urban accessories collection</description>
+            <product_count>3</product_count>
+        </category>
+    </categories>
+
+    <!-- Products Data -->
+    <products total_count="13">
+        
+        <product id="1" featured="true" trending="false">
+            <basic_information>
+                <name>Urban Leather Backpack</name>
+                <slug>urban-leather-backpack</slug>
+                <description>Premium urban leather backpack designed for the modern street fashion enthusiast. Features multiple compartments, durable construction, and sleek design perfect for daily use.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>120.00</current_price>
+                <original_price>150.00</original_price>
+                <discount_percentage>20</discount_percentage>
+                <savings>30.00</savings>
+            </pricing>
+            <category>
+                <name>Accessories</name>
+                <slug>accessories</slug>
+                <id>7</id>
+            </category>
+            <inventory>
+                <quantity>25</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Leather Backpack</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.50</average_rating>
+                <total_reviews>2</total_reviews>
+            </reviews>
+            <tags>
+                <tag>backpack</tag>
+                <tag>leather</tag>
+                <tag>urban</tag>
+                <tag>accessories</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="2" featured="false" trending="true">
+            <basic_information>
+                <name>Urban Aviators</name>
+                <slug>urban-aviators</slug>
+                <description>Classic aviator sunglasses with modern urban twist. UV protection and premium materials ensure both style and protection for the fashion-forward individual.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>55.00</current_price>
+                <original_price>70.00</original_price>
+                <discount_percentage>21.43</discount_percentage>
+                <savings>15.00</savings>
+            </pricing>
+            <category>
+                <name>Glasses &amp; Lens</name>
+                <slug>glasses-lens</slug>
+                <id>3</id>
+            </category>
+            <inventory>
+                <quantity>50</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Aviators</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.00</average_rating>
+                <total_reviews>1</total_reviews>
+            </reviews>
+            <tags>
+                <tag>sunglasses</tag>
+                <tag>aviators</tag>
+                <tag>uv-protection</tag>
+                <tag>accessories</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="3" featured="true" trending="false">
+            <basic_information>
+                <name>Urban Scent Cologne</name>
+                <slug>urban-scent-cologne</slug>
+                <description>Signature cologne capturing the essence of city life. A unique blend of modern and classic scents perfect for the urban lifestyle.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>75.00</current_price>
+                <original_price>95.00</original_price>
+                <discount_percentage>21.05</discount_percentage>
+                <savings>20.00</savings>
+            </pricing>
+            <category>
+                <name>Accessories</name>
+                <slug>accessories</slug>
+                <id>7</id>
+            </category>
+            <inventory>
+                <quantity>30</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Scent Cologne</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>5.00</average_rating>
+                <total_reviews>1</total_reviews>
+            </reviews>
+            <tags>
+                <tag>cologne</tag>
+                <tag>fragrance</tag>
+                <tag>urban</tag>
+                <tag>accessories</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="4" featured="false" trending="true">
+            <basic_information>
+                <name>Oversized Street Hoodie</name>
+                <slug>oversized-street-hoodie</slug>
+                <description>Premium oversized hoodie perfect for urban street style. Made with high-quality cotton blend for comfort and durability.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>48.00</current_price>
+                <original_price>60.00</original_price>
+                <discount_percentage>20</discount_percentage>
+                <savings>12.00</savings>
+            </pricing>
+            <category>
+                <name>Urban Tees</name>
+                <slug>urban-tees</slug>
+                <id>1</id>
+            </category>
+            <inventory>
+                <quantity>40</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Oversized Street Hoodie</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.00</average_rating>
+                <total_reviews>1</total_reviews>
+            </reviews>
+            <tags>
+                <tag>hoodie</tag>
+                <tag>oversized</tag>
+                <tag>streetwear</tag>
+                <tag>cotton</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="5" featured="false" trending="false">
+            <basic_information>
+                <name>Urban Cargo Pants</name>
+                <slug>urban-cargo-pants</slug>
+                <description>Trendy cargo pants for the modern streetwear enthusiast. Multiple pockets and comfortable fit make these perfect for urban adventures.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>65.00</current_price>
+                <original_price>80.00</original_price>
+                <discount_percentage>18.75</discount_percentage>
+                <savings>15.00</savings>
+            </pricing>
+            <category>
+                <name>Shorts &amp; Jeans</name>
+                <slug>shorts-jeans</slug>
+                <id>4</id>
+            </category>
+            <inventory>
+                <quantity>35</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Cargo Pants</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.10</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>pants</tag>
+                <tag>cargo</tag>
+                <tag>streetwear</tag>
+                <tag>urban</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="6" featured="true" trending="true">
+            <basic_information>
+                <name>Street Bomber Jacket</name>
+                <slug>street-bomber-jacket</slug>
+                <description>Classic bomber jacket with modern urban styling. Perfect layering piece for any streetwear outfit.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>85.00</current_price>
+                <original_price>110.00</original_price>
+                <discount_percentage>22.73</discount_percentage>
+                <savings>25.00</savings>
+            </pricing>
+            <category>
+                <name>Winter Wear</name>
+                <slug>winter-wear</slug>
+                <id>2</id>
+            </category>
+            <inventory>
+                <quantity>20</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Street Bomber Jacket</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.60</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>jacket</tag>
+                <tag>bomber</tag>
+                <tag>winter</tag>
+                <tag>streetwear</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="7" featured="false" trending="true">
+            <basic_information>
+                <name>Urban Athletic Sneakers</name>
+                <slug>urban-athletic-sneakers</slug>
+                <description>High-performance sneakers with street-ready style. Comfortable cushioning and durable construction for all-day wear.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>95.00</current_price>
+                <original_price>120.00</original_price>
+                <discount_percentage>20.83</discount_percentage>
+                <savings>25.00</savings>
+            </pricing>
+            <category>
+                <name>Footwear</name>
+                <slug>footwear</slug>
+                <id>6</id>
+            </category>
+            <inventory>
+                <quantity>60</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Athletic Sneakers</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.40</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>sneakers</tag>
+                <tag>athletic</tag>
+                <tag>footwear</tag>
+                <tag>urban</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="8" featured="false" trending="false">
+            <basic_information>
+                <name>Street Crossbody Bag</name>
+                <slug>street-crossbody-bag</slug>
+                <description>Functional crossbody bag perfect for urban adventures. Compact design with secure storage for essentials.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>35.00</current_price>
+                <original_price>45.00</original_price>
+                <discount_percentage>22.22</discount_percentage>
+                <savings>10.00</savings>
+            </pricing>
+            <category>
+                <name>Accessories</name>
+                <slug>accessories</slug>
+                <id>7</id>
+            </category>
+            <inventory>
+                <quantity>45</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Street Crossbody Bag</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.00</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>bag</tag>
+                <tag>crossbody</tag>
+                <tag>accessories</tag>
+                <tag>compact</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="9" featured="false" trending="false">
+            <basic_information>
+                <name>Urban Graphic Tee</name>
+                <slug>urban-graphic-tee</slug>
+                <description>Bold graphic tee showcasing street culture. High-quality print on premium cotton for lasting comfort and style.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>28.00</current_price>
+                <original_price>35.00</original_price>
+                <discount_percentage>20</discount_percentage>
+                <savings>7.00</savings>
+            </pricing>
+            <category>
+                <name>Urban Tees</name>
+                <slug>urban-tees</slug>
+                <id>1</id>
+            </category>
+            <inventory>
+                <quantity>80</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;h=500</url>
+                    <alt_text>Urban Graphic Tee</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.20</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>tee</tag>
+                <tag>graphic</tag>
+                <tag>cotton</tag>
+                <tag>streetwear</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="10" featured="true" trending="true">
+            <basic_information>
+                <name>Streetwear Complete Bundle</name>
+                <slug>streetwear-complete-bundle</slug>
+                <description>Complete streetwear bundle including hoodie, pants, sneakers, and accessories. Everything you need for the perfect urban look.</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>199.99</current_price>
+                <original_price>350.00</original_price>
+                <discount_percentage>42.86</discount_percentage>
+                <savings>150.01</savings>
+            </pricing>
+            <category>
+                <name>Streetwear</name>
+                <slug>streetwear</slug>
+                <id>5</id>
+            </category>
+            <inventory>
+                <quantity>15</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;h=300</url>
+                    <alt_text>Streetwear Complete Bundle</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>4.70</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>bundle</tag>
+                <tag>complete</tag>
+                <tag>streetwear</tag>
+                <tag>deal</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-20 16:11:27</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="11" featured="false" trending="true">
+            <basic_information>
+                <name>adidas Samba's</name>
+                <slug>adidas-samba's</slug>
+                <description>Only limited stocks</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>120.00</current_price>
+                <original_price>150.00</original_price>
+                <discount_percentage>20</discount_percentage>
+                <savings>30.00</savings>
+            </pricing>
+            <category>
+                <name>Footwear</name>
+                <slug>footwear</slug>
+                <id>6</id>
+            </category>
+            <inventory>
+                <quantity>8</quantity>
+                <status>low_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://i.pinimg.com/736x/f1/73/b6/f173b6c7ecbda4c25c2b3182fcb4349c.jpg</url>
+                    <alt_text>adidas Samba's</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>0.00</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <timestamps>
+                <created_at>2025-06-26 12:01:06</created_at>
+                <updated_at>2025-06-26 12:03:50</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="12" featured="false" trending="true">
+            <basic_information>
+                <name>Hoodie malupet</name>
+                <slug>hoodie-malupet</slug>
+                <description>Bili na kayo</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>1600.00</current_price>
+                <original_price>2000.00</original_price>
+                <discount_percentage>20</discount_percentage>
+                <savings>400.00</savings>
+            </pricing>
+            <category>
+                <name>Streetwear</name>
+                <slug>streetwear</slug>
+                <id>5</id>
+            </category>
+            <inventory>
+                <quantity>10</quantity>
+                <status>in_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://i.pinimg.com/736x/13/75/72/13757206e946c088e1de7a9975313e84.jpg</url>
+                    <alt_text>Hoodie malupet</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>0.00</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <timestamps>
+                <created_at>2025-06-26 13:28:17</created_at>
+                <updated_at>2025-06-26 13:28:17</updated_at>
+            </timestamps>
+        </product>
+
+        <product id="13" featured="false" trending="false">
+            <basic_information>
+                <name>Nike Shoes</name>
+                <slug>nike-shoes</slug>
+                <description>lopit talaga</description>
+            </basic_information>
+            <pricing currency="USD">
+                <current_price>150.00</current_price>
+            </pricing>
+            <category>
+                <name>Footwear</name>
+                <slug>footwear</slug>
+                <id>6</id>
+            </category>
+            <inventory>
+                <quantity>5</quantity>
+                <status>low_stock</status>
+            </inventory>
+            <media>
+                <image>
+                    <url>https://i.pinimg.com/736x/73/3d/c8/733dc8eb0688b6b76e0e5915e39b8884.jpg</url>
+                    <alt_text>Nike Shoes</alt_text>
+                </image>
+            </media>
+            <reviews>
+                <average_rating>0.00</average_rating>
+                <total_reviews>0</total_reviews>
+            </reviews>
+            <tags>
+                <tag>malupit to</tag>
+            </tags>
+            <timestamps>
+                <created_at>2025-06-29 15:38:17</created_at>
+                <updated_at>2025-06-29 15:38:17</updated_at>
+            </timestamps>
+        </product>
+
+    </products>
+
+    <!-- Statistics -->
+    <statistics>
+        <products>
+            <total>13</total>
+            <featured>4</featured>
+            <trending>7</trending>
+            <in_stock>11</in_stock>
+            <low_stock>2</low_stock>
+            <out_of_stock>0</out_of_stock>
+        </products>
+        <categories>
+            <total>7</total>
+            <most_products>footwear</most_products>
+            <least_products>winter-wear</least_products>
+        </categories>
+        <pricing>
+            <lowest_price>28.00</lowest_price>
+            <highest_price>1600.00</highest_price>
+            <average_price>183.61</average_price>
+            <products_on_sale>12</products_on_sale>
+        </pricing>
+    </statistics>
+
+</urbanstitch_data>

@@ -1,0 +1,221 @@
+<?php
+session_start();
+
+// Enhanced PHPMailer detection for Hostinger
+$phpmailer_available = false;
+$phpmailer_path = null;
+
+// Try multiple possible paths
+$possible_phpmailer_paths = [
+    'PHPMailer/src/',
+    'PHPMailer\\src\\', 
+    './PHPMailer/src/',
+    '../PHPMailer/src/',
+    'vendor/phpmailer/phpmailer/src/',
+    'includes/PHPMailer/src/',
+    'lib/PHPMailer/src/'
+];
+
+foreach ($possible_phpmailer_paths as $path) {
+    if (file_exists($path . 'PHPMailer.php') && 
+        file_exists($path . 'SMTP.php') && 
+        file_exists($path . 'Exception.php')) {
+        try {
+            require_once $path . 'PHPMailer.php';
+            require_once $path . 'SMTP.php';
+            require_once $path . 'Exception.php';
+            $phpmailer_available = true;
+            $phpmailer_path = $path;
+            error_log("PHPMailer loaded successfully from: " . $path);
+            break;
+        } catch (Exception $e) {
+            error_log("PHPMailer loading failed from $path: " . $e->getMessage());
+            continue;
+        }
+    }
+}
+
+if (!$phpmailer_available) {
+    error_log("PHPMailer not found in any of the expected locations");
+}
+
+// Database connection (same as before)
+$host = '127.0.0.1';
+$dbname = 'u291995986_UrbanStitch';
+$username = 'u291995986_UrbanStitch';
+$password = 'Urbandb123';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+// Gmail SMTP Configuration
+$smtpHost = 'smtp.gmail.com';
+$smtpUsername = 'albaandrei0903@gmail.com';
+$smtpPassword = 'vgvaduzuhkilhold'; // Your app password
+$smtpPort = 465;
+$fromEmail = 'albaandrei0903@gmail.com';
+$fromName = 'UrbanStitch Security';
+
+// Enhanced email sending function for Hostinger
+function sendPasswordResetEmail($to_email, $to_name, $reset_code) {
+    global $smtpHost, $smtpUsername, $smtpPassword, $smtpPort, $fromEmail, $fromName, $phpmailer_available;
+    
+    if (!$phpmailer_available) {
+        error_log("PHPMailer not available. Using fallback for $to_email: $reset_code");
+        $_SESSION['dev_reset_code'] = $reset_code;
+        return sendFallbackEmail($to_email, $to_name, $reset_code);
+    }
+    
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+    
+    try {
+        // Clear any previous settings
+        $mail->clearAddresses();
+        $mail->clearAttachments();
+        
+        // Server settings optimized for Hostinger
+        $mail->isSMTP();
+        $mail->Host = $smtpHost;
+        $mail->SMTPAuth = true;
+        $mail->Username = $smtpUsername;
+        $mail->Password = $smtpPassword;
+        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = $smtpPort;
+        
+        // Hostinger-specific SSL options to avoid certificate issues
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        // Timeout settings for shared hosting
+        $mail->Timeout = 60;
+        $mail->SMTPKeepAlive = true;
+        
+        // Enable debug for troubleshooting (comment out in production)
+        $mail->SMTPDebug = 2;
+        $mail->Debugoutput = function($str, $level) {
+            error_log("SMTP Debug level $level: $str");
+        };
+        
+        // Recipients
+        $mail->setFrom($fromEmail, $fromName);
+        $mail->addAddress($to_email, $to_name);
+        $mail->addReplyTo($fromEmail, $fromName);
+        
+        // Content
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'Password Reset Code - UrbanStitch Security';
+        $mail->Body = getNewResetEmailTemplate($to_name, $reset_code, $to_email);
+        $mail->AltBody = "Password Reset Code\n\nYour verification code is: $reset_code\n\nThis code will expire in 15 minutes.";
+        
+        $mail->send();
+        error_log("Email sent successfully via PHPMailer to: $to_email");
+        return 'sent';
+        
+    } catch (Exception $e) {
+        error_log("PHPMailer SMTP failed: " . $e->getMessage());
+        error_log("SMTP Error Info: " . $mail->ErrorInfo);
+        
+        // Try alternative configuration
+        try {
+            $mail->clearAllRecipients();
+            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            $mail->setFrom($fromEmail, $fromName);
+            $mail->addAddress($to_email, $to_name);
+            $mail->send();
+            error_log("Email sent successfully via alternative SMTP config to: $to_email");
+            return 'sent';
+        } catch (Exception $e2) {
+            error_log("Both SMTP configurations failed. Trying fallback method.");
+            return sendFallbackEmail($to_email, $to_name, $reset_code);
+        }
+    }
+}
+
+// Fallback email function using PHP's built-in mail()
+function sendFallbackEmail($to_email, $to_name, $reset_code) {
+    $subject = "Password Reset Code - UrbanStitch";
+    $message = "
+    <html>
+    <head><title>Password Reset Code</title></head>
+    <body>
+        <h2>Password Reset Code</h2>
+        <p>Hi " . htmlspecialchars($to_name) . ",</p>
+        <p>Your password reset code is: <strong style='font-size: 24px; background: #f0f0f0; padding: 10px; border-radius: 5px;'>" . $reset_code . "</strong></p>
+        <p>This code will expire in 15 minutes.</p>
+        <p>Best regards,<br>UrbanStitch Security Team</p>
+    </body>
+    </html>";
+    
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: UrbanStitch Security <noreply@" . $_SERVER['HTTP_HOST'] . ">" . "\r\n";
+    
+    if (mail($to_email, $subject, $message, $headers)) {
+        error_log("Fallback email sent successfully to: $to_email");
+        return 'sent';
+    } else {
+        error_log("All email methods failed for: $to_email");
+        $_SESSION['dev_reset_code'] = $reset_code;
+        return 'fallback';
+    }
+}
+
+// Rest of your original code continues here...
+// (Include all your existing functions and logic)
+
+function generateResetCode() {
+    return sprintf('%06d', mt_rand(100000, 999999));
+}
+
+function getNewResetEmailTemplate($name, $code, $email) {
+    return "
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Password Reset Code - UrbanStitch</title>
+        <style>
+            body { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; }
+            .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+            .header { background: linear-gradient(135deg, #dc2626, #991b1b); padding: 40px 30px; text-align: center; color: white; }
+            .logo { color: #ffffff; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+            .content { padding: 40px 30px; text-align: center; }
+            .code-container { background: linear-gradient(135deg, #1f2937, #374151); padding: 35px; border-radius: 15px; margin: 30px 0; }
+            .code { font-size: 48px; font-weight: bold; color: #f59e0b; letter-spacing: 12px; margin: 20px 0; font-family: monospace; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <div class='logo'>🔒 UrbanStitch</div>
+                <p>Password Reset Code</p>
+            </div>
+            <div class='content'>
+                <h2>Hi " . htmlspecialchars($name) . "!</h2>
+                <p>Your password reset code is:</p>
+                <div class='code-container'>
+                    <div class='code'>" . $code . "</div>
+                </div>
+                <p>This code will expire in 15 minutes.</p>
+            </div>
+        </div>
+    </body>
+    </html>";
+}
+
+// Continue with the rest of your original code...
+// (All the form processing, HTML output, etc.)
+?>

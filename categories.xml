@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories xmlns="http://urbanstitch.com/categories" version="1.0" generated="2025-07-06T12:00:00Z">
+    
+    <metadata>
+        <total_categories>7</total_categories>
+        <total_products>13</total_products>
+        <export_date>2025-07-06 12:00:00</export_date>
+        <source>UrbanStitch E-commerce</source>
+    </metadata>
+
+    <category_list>
+        
+        <category id="urban-tees" database_id="1">
+            <n>URBAN TEES</n>
+            <display_name>Urban Tees</display_name>
+            <icon>fas fa-tshirt</icon>
+            <color_class>text-neon-green</color_class>
+            <hex_color>#00ff00</hex_color>
+            <description>Premium urban t-shirts and hoodies for street fashion enthusiasts</description>
+            <product_count>2</product_count>
+            <status>active</status>
+            <sort_order>1</sort_order>
+            <products>
+                <product_id>4</product_id>
+                <product_id>9</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=urban-tees</url>
+                <breadcrumb>Home > Categories > Urban Tees</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="winter-wear" database_id="2">
+            <n>WINTER WEAR</n>
+            <display_name>Winter Wear</display_name>
+            <icon>fas fa-snowflake</icon>
+            <color_class>text-urban-orange</color_class>
+            <hex_color>#ff6b35</hex_color>
+            <description>Stay warm and stylish with our winter collection</description>
+            <product_count>1</product_count>
+            <status>active</status>
+            <sort_order>2</sort_order>
+            <products>
+                <product_id>6</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=winter-wear</url>
+                <breadcrumb>Home > Categories > Winter Wear</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="glasses-lens" database_id="3">
+            <n>GLASSES &amp; LENS</n>
+            <display_name>Glasses &amp; Lens</display_name>
+            <icon>fas fa-glasses</icon>
+            <color_class>text-neon-green</color_class>
+            <hex_color>#00ff00</hex_color>
+            <description>Trendy sunglasses and eyewear for the modern urbanite</description>
+            <product_count>1</product_count>
+            <status>active</status>
+            <sort_order>3</sort_order>
+            <products>
+                <product_id>2</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=glasses-lens</url>
+                <breadcrumb>Home > Categories > Glasses &amp; Lens</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="shorts-jeans" database_id="4">
+            <n>SHORTS &amp; JEANS</n>
+            <display_name>Shorts &amp; Jeans</display_name>
+            <icon>fas fa-user-tie</icon>
+            <color_class>text-urban-orange</color_class>
+            <hex_color>#ff6b35</hex_color>
+            <description>Comfortable and stylish bottoms for everyday wear</description>
+            <product_count>1</product_count>
+            <status>active</status>
+            <sort_order>4</sort_order>
+            <products>
+                <product_id>5</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=shorts-jeans</url>
+                <breadcrumb>Home > Categories > Shorts &amp; Jeans</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="streetwear" database_id="5">
+            <n>STREETWEAR</n>
+            <display_name>Streetwear</display_name>
+            <icon>fas fa-tshirt</icon>
+            <color_class>text-neon-green</color_class>
+            <hex_color>#00ff00</hex_color>
+            <description>Authentic street fashion pieces that define urban culture</description>
+            <product_count>2</product_count>
+            <status>active</status>
+            <sort_order>5</sort_order>
+            <products>
+                <product_id>10</product_id>
+                <product_id>12</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=streetwear</url>
+                <breadcrumb>Home > Categories > Streetwear</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="footwear" database_id="6">
+            <n>FOOTWEAR</n>
+            <display_name>Footwear</display_name>
+            <icon>fas fa-shoe-prints</icon>
+            <color_class>text-urban-orange</color_class>
+            <hex_color>#ff6b35</hex_color>
+            <description>Urban sneakers and shoes for every street style</description>
+            <product_count>3</product_count>
+            <status>active</status>
+            <sort_order>6</sort_order>
+            <products>
+                <product_id>7</product_id>
+                <product_id>11</product_id>
+                <product_id>13</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=footwear</url>
+                <breadcrumb>Home > Categories > Footwear</breadcrumb>
+            </navigation>
+        </category>
+
+        <category id="accessories" database_id="7">
+            <n>ACCESSORIES</n>
+            <display_name>Accessories</display_name>
+            <icon>fas fa-sunglasses</icon>
+            <color_class>text-blue</color_class>
+            <hex_color>#3b82f6</hex_color>
+            <description>Complete your look with our urban accessories collection</description>
+            <product_count>3</product_count>
+            <status>active</status>
+            <sort_order>7</sort_order>
+            <products>
+                <product_id>1</product_id>
+                <product_id>3</product_id>
+                <product_id>8</product_id>
+            </products>
+            <navigation>
+                <url>/index.php?category=accessories</url>
+                <breadcrumb>Home > Categories > Accessories</breadcrumb>
+            </navigation>
+        </category>
+
+    </category_list>
+
+    <!-- Category Statistics -->
+    <statistics>
+        <most_popular>
+            <category>accessories</category>
+            <product_count>3</product_count>
+        </most_popular>
+        <featured_categories>
+            <category>streetwear</category>
+            <category>footwear</category>
+            <category>accessories</category>
+            <category>urban-tees</category>
+        </featured_categories>
+        <color_distribution>
+            <neon_green>3</neon_green>
+            <urban_orange>3</urban_orange>
+            <blue>1</blue>
+        </color_distribution>
+    </statistics>
+
+    <!-- Navigation Menu Data -->
+    <navigation_menu>
+        <main_categories>
+            <item>
+                <n>HOME</n>
+                <url>/index.php</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>CATEGORIES</n>
+                <url>/categories.php</url>
+                <active>true</active>
+                <highlight_color>#00ff00</highlight_color>
+            </item>
+            <item>
+                <n>STREETWEAR</n>
+                <url>/index.php?category=streetwear</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>FOOTWEAR</n>
+                <url>/index.php?category=footwear</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>ACCESSORIES</n>
+                <url>/index.php?category=accessories</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>WINTER WEAR</n>
+                <url>/index.php?category=winter-wear</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>BLOG</n>
+                <url>/blog.php</url>
+                <active>false</active>
+            </item>
+            <item>
+                <n>HOT OFFERS</n>
+                <url>/offers.php</url>
+                <active>false</active>
+                <special_class>hot</special_class>
+            </item>
+        </main_categories>
+    </navigation_menu>
+
+</categories>

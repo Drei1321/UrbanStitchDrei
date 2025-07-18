@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories xmlns="http://urbanstitch.com/categories" version="1.0" generated="2025-07-16T18:02:05Z">
+  <metadata>
+    <total_categories>5</total_categories>
+    <export_date>2025-07-16 18:02:05</export_date>
+    <source>UrbanStitch E-commerce</source>
+  </metadata>
+  <category_list>
+    <category id="footwear" database_id="6">
+      <name>FOOTWEAR</name>
+      <display_name>Footwear</display_name>
+      <icon>fas fa-shoe-prints</icon>
+      <color_class>text-urban-orange</color_class>
+      <description>Urban sneakers and shoes for every street style</description>
+      <product_count>2</product_count>
+      <status>active</status>
+    </category>
+    <category id="shorts-jeans" database_id="4">
+      <name>SHORTS &amp; JEANS</name>
+      <display_name>Shorts &amp; Jeans</display_name>
+      <icon>fas fa-user-tie</icon>
+      <color_class>text-urban-orange</color_class>
+      <description>Comfortable and stylish bottoms for everyday wear</description>
+      <product_count>6</product_count>
+      <status>active</status>
+    </category>
+    <category id="streetwear" database_id="5">
+      <name>STREETWEAR</name>
+      <display_name>Streetwear</display_name>
+      <icon>fas fa-tshirt</icon>
+      <color_class>text-neon-green</color_class>
+      <description>Authentic street fashion pieces that define urban culture</description>
+      <product_count>0</product_count>
+      <status>active</status>
+    </category>
+    <category id="urban-tees" database_id="1">
+      <name>URBAN TEES</name>
+      <display_name>Urban Tees</display_name>
+      <icon>fas fa-tshirt</icon>
+      <color_class>text-neon-green</color_class>
+      <description>Premium urban t-shirts and hoodies for street fashion enthusiasts</description>
+      <product_count>1</product_count>
+      <status>active</status>
+    </category>
+    <category id="winter-wear" database_id="2">
+      <name>WINTER WEAR</name>
+      <display_name>Winter Wear</display_name>
+      <icon>fas fa-snowflake</icon>
+      <color_class>text-urban-orange</color_class>
+      <description>Stay warm and stylish with our winter collection</description>
+      <product_count>7</product_count>
+      <status>active</status>
+    </category>
+  </category_list>
+</categories>

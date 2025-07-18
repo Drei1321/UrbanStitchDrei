@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urbanstitch_config xmlns="http://urbanstitch.com/config" version="1.0" generated="2025-07-06T12:00:00Z">
+    
+    <!-- Site Information -->
+    <site_info>
+        <n>UrbanStitch</n>
+        <tagline>Street Fashion Redefined</tagline>
+        <description>UrbanStitch is your destination for premium street fashion, urban wear, and lifestyle accessories that define modern street culture.</description>
+        <logo>
+            <text>Urban<span>Stitch</span></text>
+            <highlight_color>#00ff00</highlight_color>
+        </logo>
+        <contact>
+            <email>info@urbanstitch.com</email>
+            <support_email>support@urbanstitch.com</support_email>
+            <phone>+1 (555) 123-4567</phone>
+        </contact>
+        <social_media>
+            <instagram>@urbanstitch</instagram>
+            <twitter>@urbanstitch</twitter>
+            <facebook>urbanstitchfashion</facebook>
+            <tiktok>@urbanstitch</tiktok>
+        </social_media>
+    </site_info>
+
+    <!-- Design Theme -->
+    <theme>
+        <colors>
+            <primary>#1a1a1a</primary>
+            <secondary>#2d2d2d</secondary>
+            <accent>#00ff00</accent>
+            <orange>#ff6b35</orange>
+            <blue>#3b82f6</blue>
+            <white>#ffffff</white>
+            <gray>#666666</gray>
+            <light_gray>#f0f0f0</light_gray>
+            <error>#ff4444</error>
+        </colors>
+        <fonts>
+            <primary>Arial, sans-serif</primary>
+            <secondary>Helvetica, sans-serif</secondary>
+            <icon_font>Font Awesome 6.4.0</icon_font>
+        </fonts>
+        <animations>
+            <pulse_neon>animate-pulse-neon</pulse_neon>
+            <transition_default>all 0.3s</transition_default>
+        </animations>
+    </theme>
+
+    <!-- Navigation Configuration -->
+    <navigation>
+        <header>
+            <top_banner>
+                <message>FREE SHIPPING THIS WEEK ORDER OVER • $50</message>
+                <animation>animate-pulse-neon</animation>
+            </top_banner>
+            <currency_options>
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+            </currency_options>
+            <language_options>
+                <option value="en">ENGLISH</option>
+                <option value="es">SPANISH</option>
+            </language_options>
+        </header>
+        <main_menu>
+            <item>
+                <n>HOME</n>
+                <url>/index.php</url>
+                <order>1</order>
+            </item>
+            <item>
+                <n>CATEGORIES</n>
+                <url>/categories.php</url>
+                <order>2</order>
+            </item>
+            <item>
+                <n>STREETWEAR</n>
+                <url>/index.php?category=streetwear</url>
+                <order>3</order>
+            </item>
+            <item>
+                <n>FOOTWEAR</n>
+                <url>/index.php?category=footwear</url>
+                <order>4</order>
+            </item>
+            <item>
+                <n>ACCESSORIES</n>
+                <url>/index.php?category=accessories</url>
+                <order>5</order>
+            </item>
+            <item>
+                <n>WINTER WEAR</n>
+                <url>/index.php?category=winter-wear</url>
+                <order>6</order>
+            </item>
+            <item>
+                <n>BLOG</n>
+                <url>/blog.php</url>
+                <order>7</order>
+            </item>
+            <item>
+                <n>HOT OFFERS</n>
+                <url>/offers.php</url>
+                <order>8</order>
+                <special_class>hot</special_class>
+            </item>
+        </main_menu>
+    </navigation>
+
+    <!-- Business Settings -->
+    <business_settings>
+        <shipping>
+            <free_shipping_threshold>50.00</free_shipping_threshold>
+            <currency>USD</currency>
+            <default_shipping_cost>9.99</default_shipping_cost>
+            <processing_time>2-3 business days</processing_time>
+            <delivery_time>5-7 business days</delivery_time>
+        </shipping>
+        <returns>
+            <return_period_days>30</return_period_days>
+            <return_policy>Easy returns within 30 days</return_policy>
+        </returns>
+        <security>
+            <ssl_enabled>true</ssl_enabled>
+            <security_message>Secure checkout with SSL encryption</security_message>
+        </security>
+        <payment_methods>
+            <method>
+                <n>PayPal</n>
+                <code>paypal</code>
+                <enabled>true</enabled>
+                <icon>fab fa-paypal</icon>
+            </method>
+            <method>
+                <n>Credit Card</n>
+                <code>credit_card</code>
+                <enabled>true</enabled>
+                <icon>fas fa-credit-card</icon>
+            </method>
+        </payment_methods>
+    </business_settings>
+
+    <!-- Feature Flags -->
+    <features>
+        <wishlist_enabled>true</wishlist_enabled>
+        <cart_enabled>true</cart_enabled>
+        <reviews_enabled>true</reviews_enabled>
+        <newsletter_enabled>true</newsletter_enabled>
+        <user_registration>true</user_registration>
+        <guest_checkout>false</guest_checkout>
+        <xml_export>true</xml_export>
+        <admin_panel>true</admin_panel>
+    </features>
+
+    <!-- SEO Configuration -->
+    <seo>
+        <meta_title>UrbanStitch - Premium Street Fashion &amp; Urban Wear</meta_title>
+        <meta_description>Discover the latest in street fashion with UrbanStitch. Premium urban wear, sneakers, accessories and streetwear that define modern culture.</meta_description>
+        <meta_keywords>streetwear, urban fashion, sneakers, hoodies, street style, urban accessories, modern fashion</meta_keywords>
+        <og_title>UrbanStitch - Street Fashion Redefined</og_title>
+        <og_description>Your destination for premium street fashion and urban lifestyle products</og_description>
+        <og_image>/assets/urbanstitch-og-image.jpg</og_image>
+        <canonical_url>https://urbanstitch.com</canonical_url>
+    </seo>
+
+    <!-- Database Configuration -->
+    <database>
+        <host>localhost</host>
+        <database_name>urbanstitch_db</database_name>
+        <charset>utf8</charset>
+        <collation>utf8mb4_unicode_ci</collation>
+        <tables>
+            <table>users</table>
+            <table>products</table>
+            <table>categories</table>
+            <table>cart_items</table>
+            <table>wishlist_items</table>
+            <table>orders</table>
+            <table>order_items</table>
+            <table>product_reviews</table>
+            <table>newsletter_subscriptions</table>
+        </tables>
+    </database>
+
+    <!-- File Paths -->
+    <file_structure>
+        <root>/</root>
+        <assets>/assets/</assets>
+        <images>/images/</images>
+        <css>/css/</css>
+        <js>/js/</js>
+        <uploads>/uploads/</uploads>
+        <exports>/exports/</exports>
+    </file_structure>
+
+    <!-- API Endpoints -->
+    <api_endpoints>
+        <export_products>/export_xml.php?type=products</export_products>
+        <export_cart>/export_xml.php?type=cart</export_cart>
+        <export_categories>/export_xml.php?type=categories</export_categories>
+        <product_detail>/product.php?id={product_id}</product_detail>
+        <category_products>/index.php?category={category_slug}</category_products>
+        <search>/index.php?search={query}</search>
+    </api_endpoints>
+
+    <!-- Error Messages -->
+    <error_messages>
+        <product_not_found>Product not found</product_not_found>
+        <login_required>Please login to continue</login_required>
+        <cart_empty>Your cart is empty</cart_empty>
+        <wishlist_empty>Your wishlist is empty</wishlist_empty>
+        <out_of_stock>Product is out of stock</out_of_stock>
+        <database_error>Database connection error</database_error>
+        <invalid_credentials>Invalid username or password</invalid_credentials>
+    </error_messages>
+
+    <!-- Success Messages -->
+    <success_messages>
+        <product_added_cart>Product added to cart successfully</product_added_cart>
+        <product_added_wishlist>Product added to wishlist successfully</product_added_wishlist>
+        <login_success>Login successful</login_success>
+        <registration_success>Registration successful</registration_success>
+        <order_placed>Order placed successfully</order_placed>
+    </success_messages>
+
+</urbanstitch_config>

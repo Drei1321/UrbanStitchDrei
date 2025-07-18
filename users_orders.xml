@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urbanstitch_users_orders xmlns="http://urbanstitch.com/users" version="1.0" generated="2025-07-06T12:00:00Z">
+    
+    <metadata>
+        <total_users>6</total_users>
+        <total_orders>3</total_orders>
+        <export_date>2025-07-06 12:00:00</export_date>
+        <source>UrbanStitch E-commerce</source>
+    </metadata>
+
+    <!-- Users Data -->
+    <users>
+        
+        <user id="1" type="admin">
+            <username>admin</username>
+            <email>admin@urbanstitch.com</email>
+            <profile>
+                <first_name>Admin</first_name>
+                <last_name>User</last_name>
+                <full_name>Admin User</full_name>
+            </profile>
+            <status>
+                <is_admin>true</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login>2025-07-02 12:48:08</last_login>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-07-02 04:48:08</updated_at>
+            </activity>
+        </user>
+
+        <user id="2" type="customer">
+            <username>john_doe</username>
+            <email>john@example.com</email>
+            <profile>
+                <first_name>John</first_name>
+                <last_name>Doe</last_name>
+                <full_name>John Doe</full_name>
+            </profile>
+            <status>
+                <is_admin>false</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login></last_login>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </activity>
+            <purchase_history>
+                <total_orders>1</total_orders>
+                <total_spent>219.98</total_spent>
+            </purchase_history>
+        </user>
+
+        <user id="3" type="customer">
+            <username>jane_smith</username>
+            <email>jane@example.com</email>
+            <profile>
+                <first_name>Jane</first_name>
+                <last_name>Smith</last_name>
+                <full_name>Jane Smith</full_name>
+            </profile>
+            <status>
+                <is_admin>false</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login></last_login>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </activity>
+            <purchase_history>
+                <total_orders>1</total_orders>
+                <total_spent>129.99</total_spent>
+            </purchase_history>
+        </user>
+
+        <user id="4" type="customer">
+            <username>mike_wilson</username>
+            <email>mike@example.com</email>
+            <profile>
+                <first_name>Mike</first_name>
+                <last_name>Wilson</last_name>
+                <full_name>Mike Wilson</full_name>
+            </profile>
+            <status>
+                <is_admin>false</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login></last_login>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </activity>
+            <purchase_history>
+                <total_orders>1</total_orders>
+                <total_spent>89.99</total_spent>
+            </purchase_history>
+        </user>
+
+        <user id="5" type="customer">
+            <username>drei1</username>
+            <email>albaandrei0904@gmail.com</email>
+            <profile>
+                <first_name>andrei</first_name>
+                <last_name>Alba</last_name>
+                <full_name>andrei Alba</full_name>
+            </profile>
+            <status>
+                <is_admin>false</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login>2025-07-02 12:47:15</last_login>
+                <created_at>2025-06-26 13:04:24</created_at>
+                <updated_at>2025-07-02 04:47:15</updated_at>
+            </activity>
+            <cart>
+                <items>2</items>
+                <product_ids>
+                    <product_id>12</product_id>
+                    <product_id>1</product_id>
+                </product_ids>
+            </cart>
+            <purchase_history>
+                <total_orders>0</total_orders>
+                <total_spent>0.00</total_spent>
+            </purchase_history>
+        </user>
+
+        <user id="6" type="customer">
+            <username>drei2</username>
+            <email>albaandrei87@gmail.com</email>
+            <profile>
+                <first_name>andrei</first_name>
+                <last_name>Alba</last_name>
+                <full_name>andrei Alba</full_name>
+            </profile>
+            <status>
+                <is_admin>false</is_admin>
+                <email_verified>true</email_verified>
+                <account_status>active</account_status>
+            </status>
+            <activity>
+                <last_login>2025-06-29 19:55:28</last_login>
+                <created_at>2025-06-26 13:28:52</created_at>
+                <updated_at>2025-06-29 11:55:28</updated_at>
+            </activity>
+            <purchase_history>
+                <total_orders>0</total_orders>
+                <total_spent>0.00</total_spent>
+            </purchase_history>
+        </user>
+
+    </users>
+
+    <!-- Orders Data -->
+    <orders>
+        
+        <order id="1">
+            <order_number>ORD-001</order_number>
+            <customer>
+                <user_id>2</user_id>
+                <username>john_doe</username>
+                <email>john@example.com</email>
+                <name>John Doe</name>
+            </customer>
+            <financial>
+                <total_amount currency="USD">219.98</total_amount>
+                <payment_method>paypal</payment_method>
+                <payment_id></payment_id>
+            </financial>
+            <status>
+                <order_status>completed</order_status>
+                <fulfillment_status>fulfilled</fulfillment_status>
+            </status>
+            <timestamps>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+                <completed_at>2025-06-26 07:33:34</completed_at>
+            </timestamps>
+            <items>
+                <item>
+                    <product_id>1</product_id>
+                    <product_name>Urban Leather Backpack</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>120.00</unit_price>
+                    <total_price>120.00</total_price>
+                </item>
+                <item>
+                    <product_id>4</product_id>
+                    <product_name>Oversized Street Hoodie</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>48.00</unit_price>
+                    <total_price>48.00</total_price>
+                </item>
+            </items>
+        </order>
+
+        <order id="2">
+            <order_number>ORD-002</order_number>
+            <customer>
+                <user_id>3</user_id>
+                <username>jane_smith</username>
+                <email>jane@example.com</email>
+                <name>Jane Smith</name>
+            </customer>
+            <financial>
+                <total_amount currency="USD">129.99</total_amount>
+                <payment_method>paypal</payment_method>
+                <payment_id></payment_id>
+            </financial>
+            <status>
+                <order_status>completed</order_status>
+                <fulfillment_status>fulfilled</fulfillment_status>
+            </status>
+            <timestamps>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+                <completed_at>2025-06-26 07:33:34</completed_at>
+            </timestamps>
+            <items>
+                <item>
+                    <product_id>7</product_id>
+                    <product_name>Urban Athletic Sneakers</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>95.00</unit_price>
+                    <total_price>95.00</total_price>
+                </item>
+            </items>
+        </order>
+
+        <order id="3">
+            <order_number>ORD-003</order_number>
+            <customer>
+                <user_id>4</user_id>
+                <username>mike_wilson</username>
+                <email>mike@example.com</email>
+                <name>Mike Wilson</name>
+            </customer>
+            <financial>
+                <total_amount currency="USD">89.99</total_amount>
+                <payment_method>paypal</payment_method>
+                <payment_id></payment_id>
+            </financial>
+            <status>
+                <order_status>pending</order_status>
+                <fulfillment_status>pending</fulfillment_status>
+            </status>
+            <timestamps>
+                <created_at>2025-06-26 07:33:34</created_at>
+                <updated_at>2025-06-26 07:33:34</updated_at>
+            </timestamps>
+            <items>
+                <item>
+                    <product_id>6</product_id>
+                    <product_name>Street Bomber Jacket</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>85.00</unit_price>
+                    <total_price>85.00</total_price>
+                </item>
+            </items>
+        </order>
+
+    </orders>
+
+    <!-- Shopping Cart Data -->
+    <active_carts>
+        
+        <cart user_id="1" username="admin">
+            <items>
+                <item>
+                    <product_id>2</product_id>
+                    <product_name>Urban Aviators</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>55.00</unit_price>
+                    <added_at>2025-06-29 11:58:55</added_at>
+                </item>
+            </items>
+            <summary>
+                <total_items>1</total_items>
+                <total_value>55.00</total_value>
+            </summary>
+        </cart>
+
+        <cart user_id="5" username="drei1">
+            <items>
+                <item>
+                    <product_id>12</product_id>
+                    <product_name>Hoodie malupet</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>1600.00</unit_price>
+                    <added_at>2025-06-29 15:39:28</added_at>
+                </item>
+                <item>
+                    <product_id>1</product_id>
+                    <product_name>Urban Leather Backpack</product_name>
+                    <quantity>1</quantity>
+                    <unit_price>120.00</unit_price>
+                    <added_at>2025-07-02 04:47:20</added_at>
+                </item>
+            </items>
+            <summary>
+                <total_items>2</total_items>
+                <total_value>1720.00</total_value>
+            </summary>
+        </cart>
+
+    </active_carts>
+
+    <!-- Statistics -->
+    <statistics>
+        <users>
+            <total>6</total>
+            <verified>6</verified>
+            <admin>1</admin>
+            <customers>5</customers>
+            <active_last_30_days>2</active_last_30_days>
+        </users>
+        <orders>
+            <total>3</total>
+            <completed>2</completed>
+            <pending>1</pending>
+            <total_revenue>349.97</total_revenue>
+            <completed_revenue>349.97</completed_revenue>
+            <average_order_value>116.66</average_order_value>
+        </orders>
+        <cart_abandonment>
+            <active_carts>2</active_carts>
+            <total_abandoned_value>1775.00</total_abandoned_value>
+        </cart_abandonment>
+    </statistics>
+
+</urbanstitch_users_orders>

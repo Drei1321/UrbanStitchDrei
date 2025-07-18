@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urbanstitch_data xmlns="http://urbanstitch.com/products" version="1.0" generated="2025-07-16T18:02:05Z">
+  <categories>
+    <category id="6" slug="footwear">
+      <name>Footwear</name>
+      <icon>fas fa-shoe-prints</icon>
+      <color>text-urban-orange</color>
+      <description>Urban sneakers and shoes for every street style</description>
+      <product_count>2</product_count>
+    </category>
+    <category id="4" slug="shorts-jeans">
+      <name>Shorts &amp; Jeans</name>
+      <icon>fas fa-user-tie</icon>
+      <color>text-urban-orange</color>
+      <description>Comfortable and stylish bottoms for everyday wear</description>
+      <product_count>6</product_count>
+    </category>
+    <category id="5" slug="streetwear">
+      <name>Streetwear</name>
+      <icon>fas fa-tshirt</icon>
+      <color>text-neon-green</color>
+      <description>Authentic street fashion pieces that define urban culture</description>
+      <product_count>0</product_count>
+    </category>
+    <category id="1" slug="urban-tees">
+      <name>Urban Tees</name>
+      <icon>fas fa-tshirt</icon>
+      <color>text-neon-green</color>
+      <description>Premium urban t-shirts and hoodies for street fashion enthusiasts</description>
+      <product_count>1</product_count>
+    </category>
+    <category id="2" slug="winter-wear">
+      <name>Winter Wear</name>
+      <icon>fas fa-snowflake</icon>
+      <color>text-urban-orange</color>
+      <description>Stay warm and stylish with our winter collection</description>
+      <product_count>7</product_count>
+    </category>
+  </categories>
+  <products total_count="16">
+    <product id="44" featured="false" trending="false">
+      <basic_information>
+        <name>MEXICO 66 | Unisex | Yellow/Black | UNISEX SHOES | Onitsuka Tiger Australia</name>
+        <slug>mexico-66-|-unisex-|-yellow/black-|-unisex-shoes-|-onitsuka-tiger-australia</slug>
+        <description>MEXICO 66 | Unisex | Yellow/Black | UNISEX SHOES | Onitsuka Tiger Australia</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>8,000.00</current_price>
+        <original_price>8,500.00</original_price>
+        <discount_percentage>5.88</discount_percentage>
+        <savings>500.00</savings>
+      </pricing>
+      <category>
+        <name>Footwear</name>
+        <slug>footwear</slug>
+        <id>6</id>
+      </category>
+      <inventory>
+        <quantity>90</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/82/81/61/82816107ad1a21f08a9a9471ffb8f52d.jpg</url>
+          <alt_text>MEXICO 66 | Unisex | Yellow/Black | UNISEX SHOES | Onitsuka Tiger Australia</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-17 00:00:33</created_at>
+        <updated_at>2025-07-17 00:00:33</updated_at>
+      </timestamps>
+    </product>
+    <product id="43" featured="true" trending="true">
+      <basic_information>
+        <name>ON CLOUDTILT | BrownsShoes</name>
+        <slug>on-cloudtilt-|-brownsshoes</slug>
+        <description>Details CloudTec Phase® for seamless weight transferPrecision-crafted with Finite Element AnalysisUltra-lightweight, smooth midsoleAlignment of cloud elements delivers perfect cushioningSock construction and speed laces, to pull on and goUpper mesh made with 100% recycled polyesterHigh energy return, thanks to Helion™ superfoamDope dyed for 90% less water usage Shipping &amp; Returns Free shipping on all order.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>8,499.00</current_price>
+        <original_price>9,000.00</original_price>
+        <discount_percentage>5.57</discount_percentage>
+        <savings>501.00</savings>
+      </pricing>
+      <category>
+        <name>Footwear</name>
+        <slug>footwear</slug>
+        <id>6</id>
+      </category>
+      <inventory>
+        <quantity>100</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/71/24/26/712426dd65edfa9c32277779fb4e82b9.jpg</url>
+          <alt_text>ON CLOUDTILT | BrownsShoes</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:50:25</created_at>
+        <updated_at>2025-07-16 11:50:25</updated_at>
+      </timestamps>
+    </product>
+    <product id="42" featured="false" trending="false">
+      <basic_information>
+        <name>Mens Vintage Baggy Coat Zip Outerwear Tops Male Retro Lapel Jacket Casual</name>
+        <slug>mens-vintage-baggy-coat-zip-outerwear-tops-male-retro-lapel-jacket-casual</slug>
+        <description>Product Description Real Size Infomation Unit:cm/inch 1Inch=2.54cm notes: 1. Due to the change of screen color setting, the actual fabric color may be slightly different from the online color. 2. The label size is Asian size, the parameters of each size are measured by placing the product on a flat table to measure its outer size. Please measure yourself before ordering, if you are not sure, please contact us.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>2,599.00</current_price>
+        <original_price>3,099.00</original_price>
+        <discount_percentage>16.13</discount_percentage>
+        <savings>500.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/10/a2/41/10a241f1b2980b95b0d5a0a3e40630da.jpg</url>
+          <alt_text>Mens Vintage Baggy Coat Zip Outerwear Tops Male Retro Lapel Jacket Casual</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:47:22</created_at>
+        <updated_at>2025-07-16 11:47:22</updated_at>
+      </timestamps>
+    </product>
+    <product id="41" featured="false" trending="true">
+      <basic_information>
+        <name>Brushed Wide Fit Carpenter Denim Pants [Black]</name>
+        <slug>brushed-wide-fit-carpenter-denim-pants-[black]</slug>
+        <description>These premium black carpenter denim pants feature a relaxed wide-fit silhouette with distinctive snap details at the hem and custom metal hardware. The high-density cotton fabric undergoes an all-brush washing technique to achieve a subtle, graceful finish that elevates the classic workwear style.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>2,000.00</current_price>
+        <original_price>2,499.00</original_price>
+        <discount_percentage>19.97</discount_percentage>
+        <savings>499.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>35</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/89/ce/02/89ce02131e827f152805f5a231a7d7fa.jpg</url>
+          <alt_text>Brushed Wide Fit Carpenter Denim Pants [Black]</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:41:44</created_at>
+        <updated_at>2025-07-16 11:41:44</updated_at>
+      </timestamps>
+    </product>
+    <product id="40" featured="false" trending="false">
+      <basic_information>
+        <name>Men's Washed Vintage Wide Leg Flare Jeans, Frayed Plain Dark Blue Long Distressed Baggy Jeans, For Husband, Boyfriend Gifts</name>
+        <slug>men's-washed-vintage-wide-leg-flare-jeans,-frayed-plain-dark-blue-long-distressed-baggy-jeans,-for-husband,-boyfriend-gifts</slug>
+        <description>Men's Washed Vintage Wide Leg Flare Jeans, Frayed Plain Dark Blue Long Distressed Baggy Jeans, For Husband, Boyfriend Gifts Light Wash Casual - Amekaji Denim Plain,All Over Print Wide Leg Non-Stretch Summer,All Men Clothing, size features are:Bust: ,Length: ,Sleeve Length:</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>1,600.00</current_price>
+        <original_price>2,000.00</original_price>
+        <discount_percentage>20</discount_percentage>
+        <savings>400.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/29/2e/54/292e547695a834932062b733b37360fd.jpg</url>
+          <alt_text>Men's Washed Vintage Wide Leg Flare Jeans, Frayed Plain Dark Blue Long Distressed Baggy Jeans, For Husband, Boyfriend Gifts</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:39:58</created_at>
+        <updated_at>2025-07-16 11:39:58</updated_at>
+      </timestamps>
+    </product>
+    <product id="39" featured="true" trending="true">
+      <basic_information>
+        <name>Parachute Pants | UNIQLO US</name>
+        <slug>parachute-pants-|-uniqlo-us</slug>
+        <description>Shop Parachute Pants at UNIQLO US. Read customer reviews, explore styling ideas, and more.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>2,000.00</current_price>
+        <original_price>2,990.00</original_price>
+        <discount_percentage>33.11</discount_percentage>
+        <savings>990.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>20</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/736x/31/bf/44/31bf449bd53714db9bf3583741ccc771.jpg</url>
+          <alt_text>Parachute Pants | UNIQLO US</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:38:15</created_at>
+        <updated_at>2025-07-16 11:38:15</updated_at>
+      </timestamps>
+    </product>
+    <product id="38" featured="true" trending="true">
+      <basic_information>
+        <name>Cargo Pants Fashion Trend: Styling &amp; Shopping Tips » coco bassey</name>
+        <slug>cargo-pants-fashion-trend:-styling-&amp;-shopping-tips-»-coco-bassey</slug>
+        <description>Are you into the cargo pants fashion trend? Coco Bassey styles her Hudson Jeans cargo pants &amp; shares a curated selection of stylish options.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>2,200.00</current_price>
+        <original_price>2,500.00</original_price>
+        <discount_percentage>12</discount_percentage>
+        <savings>300.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>28</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/37/74/1f/37741fc0d2455766c778953aaec64f2c.jpg</url>
+          <alt_text>Cargo Pants Fashion Trend: Styling &amp; Shopping Tips » coco bassey</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:36:42</created_at>
+        <updated_at>2025-07-16 11:36:42</updated_at>
+      </timestamps>
+    </product>
+    <product id="37" featured="false" trending="false">
+      <basic_information>
+        <name>BOWSTONS JEANS - RAW DENIM</name>
+        <slug>bowstons-jeans---raw-denim</slug>
+        <description>Meet our take on wide leg raw denim in our perfectly fitting unisex Bowstons4 cut. Perfect balance between a heavy denim feel and daily comfort achieved by 13,5oz 100% cotton indigo denim. This might be the only pair of pants you will ever need.</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>2,000.00</current_price>
+        <original_price>2,000.00</original_price>
+        <discount_percentage>0</discount_percentage>
+        <savings>0.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>35</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/ec/4c/76/ec4c76766d6af90f2d9ae2227b8765c0.jpg</url>
+          <alt_text>BOWSTONS JEANS - RAW DENIM</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:35:29</created_at>
+        <updated_at>2025-07-16 11:35:29</updated_at>
+      </timestamps>
+    </product>
+    <product id="34" featured="false" trending="false">
+      <basic_information>
+        <name>Elwood Straight Leg Jeans in Vintage Indigo at Nordstrom</name>
+        <slug>elwood-straight-leg-jeans-in-vintage-indigo-at-nordstrom</slug>
+        <description>A smart straight-leg silhouette lends polished ease to these casual jeans cut from nonstretch denim. Exclusive retailer 31" inseam; 19" leg opening; 12 1/2" front rise; 16" back rise (size 32) Zip fly with button closure Five-pocket style 100% cotton Machine wash, tumble dry Imported</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>1,200.00</current_price>
+        <original_price>2,000.00</original_price>
+        <discount_percentage>40</discount_percentage>
+        <savings>800.00</savings>
+      </pricing>
+      <category>
+        <name>Shorts &amp; Jeans</name>
+        <slug>shorts-jeans</slug>
+        <id>4</id>
+      </category>
+      <inventory>
+        <quantity>35</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/7d/9d/37/7d9d37b96d56728b2766058a850dd97e.jpg</url>
+          <alt_text>Elwood Straight Leg Jeans in Vintage Indigo at Nordstrom</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-16 11:28:44</created_at>
+        <updated_at>2025-07-16 11:28:44</updated_at>
+      </timestamps>
+    </product>
+    <product id="33" featured="false" trending="false">
+      <basic_information>
+        <name>Men T-Shirts Fit Crew Neck Short Sleeve Graphic Tee Cool Stuff Street Summer Knit Top</name>
+        <slug>men-t-shirts-fit-crew-neck-short-sleeve-graphic-tee-cool-stuff-street-summer-knit-top</slug>
+        <description>Men T-Shirts Fit Crew Neck Short Sleeve Graphic Tee Cool Stuff Street Summer Knit Top Black Avant-Garde - Street Casual,Casual - Modern Casual Short Sleeve Fabric Letter Medium Stretch Summer Men Clothing, size features are:Bust: ,Length: ,Sleeve Length:</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>800.00</current_price>
+        <original_price>1,000.00</original_price>
+        <discount_percentage>20</discount_percentage>
+        <savings>200.00</savings>
+      </pricing>
+      <category>
+        <name>Urban Tees</name>
+        <slug>urban-tees</slug>
+        <id>1</id>
+      </category>
+      <inventory>
+        <quantity>4</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/b2/c1/da/b2c1da9f22bb7db90dd9e29eaec25b8a.jpg</url>
+          <alt_text>Men T-Shirts Fit Crew Neck Short Sleeve Graphic Tee Cool Stuff Street Summer Knit Top</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 20:43:51</created_at>
+        <updated_at>2025-07-15 23:27:32</updated_at>
+      </timestamps>
+    </product>
+    <product id="31" featured="false" trending="true">
+      <basic_information>
+        <name>Men's Sport Jacket, Outdoor Waterproof Multi-zipper Windbreaker Coat</name>
+        <slug>men's-sport-jacket,-outdoor-waterproof-multi-zipper-windbreaker-coat</slug>
+        <description>Free Returns ✓ Free Shipping✓. Men's Sport Jacket, Outdoor Waterproof Multi-zipper Windbreaker Coat- undefined</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>1,800.00</current_price>
+        <original_price>2,000.00</original_price>
+        <discount_percentage>10</discount_percentage>
+        <savings>200.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/58/30/a6/5830a60a59defb228eaf3525e2cb68ca.jpg</url>
+          <alt_text>Men's Sport Jacket, Outdoor Waterproof Multi-zipper Windbreaker Coat</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 18:39:14</created_at>
+        <updated_at>2025-07-15 18:39:14</updated_at>
+      </timestamps>
+    </product>
+    <product id="30" featured="false" trending="false">
+      <basic_information>
+        <name>Men's Colorblock Long Sleeve Jacket &amp; Outerwear, Spring Autumn</name>
+        <slug>men's-colorblock-long-sleeve-jacket-&amp;-outerwear,-spring-autumn</slug>
+        <description>Men's Colorblock Long Sleeve Jacket &amp; Outerwear, Spring Autumn Grey Sports &amp; Outdoor - Mountain/Outdoor Long Sleeve Woven Fabric Colorblock,Letter Other Non-Stretch Spring/Fall Men Clothing, size features are:Bust: ,Length: ,Sleeve</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>1,600.00</current_price>
+        <original_price>2,000.00</original_price>
+        <discount_percentage>20</discount_percentage>
+        <savings>400.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/eb/dd/27/ebdd27e9068c198bd6cbc17d735eb490.jpg</url>
+          <alt_text>Men's Colorblock Long Sleeve Jacket &amp; Outerwear, Spring Autumn</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 18:34:51</created_at>
+        <updated_at>2025-07-15 18:34:51</updated_at>
+      </timestamps>
+    </product>
+    <product id="29" featured="false" trending="false">
+      <basic_information>
+        <name>Sweatshirt Zip Hoodie Pullover Letter Front Pocket For Men's</name>
+        <slug>zity-men's-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket</slug>
+        <description>Selling Points 1. Gender: Women's Men's 2. What's in the box: Hoodie Specifications Gender: Women's, Men's, Unisex, Style: Fashion, Y2K, Types: Sweatshirt, Zip Hoodie, Pullover, Design: Front Pocket, Pattern: Letter, Print Type: Hot Stamping, Fabric: Polyester, Length [Top] (cm):</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>5,500.00</current_price>
+        <original_price>6,000.00</original_price>
+        <discount_percentage>8.33</discount_percentage>
+        <savings>500.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>50</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/736x/f8/8e/83/f88e837dfcb3415d1be6941c333e5aac.jpg</url>
+          <alt_text>Sweatshirt Zip Hoodie Pullover Letter Front Pocket For Men's</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 14:30:28</created_at>
+        <updated_at>2025-07-15 16:30:25</updated_at>
+      </timestamps>
+    </product>
+    <product id="28" featured="false" trending="true">
+      <basic_information>
+        <name>1pc Loose Fit Men's Hooded Padded Coat With Zip Pocket, Plain Going Out Basic Warm Jacket</name>
+        <slug>1pc-loose-fit-men's-hooded-padded-coat-with-zip-pocket,-plain-going-out-basic-warm-jacket</slug>
+        <description>1pc Loose Fit Men's Hooded Padded Coat With Zip Pocket, Plain Going Out Basic Warm Jacket Black Sports &amp; Outdoor - Gym Commuting,Casual - Basic,Casual - Modern Casual Long Sleeve Fabric Plain Puffer Non-Stretch Spring/Fall,Winter Men Clothing, size features are:Bust: ,Length: ,Sleeve Length:</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>3,000.00</current_price>
+        <original_price>3,400.00</original_price>
+        <discount_percentage>11.76</discount_percentage>
+        <savings>400.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/aa/0a/3b/aa0a3bff18210d3f20f5cdc5ca496952.jpg</url>
+          <alt_text>1pc Loose Fit Men's Hooded Padded Coat With Zip Pocket, Plain Going Out Basic Warm Jacket</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 14:29:11</created_at>
+        <updated_at>2025-07-15 14:29:11</updated_at>
+      </timestamps>
+    </product>
+    <product id="27" featured="false" trending="false">
+      <basic_information>
+        <name>Winter Color Block Lamb Thermal Fleece Jacket</name>
+        <slug>winter-color-block-lamb-thermal-fleece-jacket</slug>
+        <description>Winter Color Block Lamb Thermal Fleece Jacketet</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>5,000.00</current_price>
+        <original_price>5,500.00</original_price>
+        <discount_percentage>9.09</discount_percentage>
+        <savings>500.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>70</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>https://i.pinimg.com/1200x/4a/e2/3d/4ae23d869f35b7973cdfc59592c738fb.jpg</url>
+          <alt_text>Winter Color Block Lamb Thermal Fleece Jacket</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-15 14:28:06</created_at>
+        <updated_at>2025-07-15 14:28:06</updated_at>
+      </timestamps>
+    </product>
+    <product id="25" featured="false" trending="false">
+      <basic_information>
+        <name>coffee gift</name>
+        <slug>coffee-gift</slug>
+        <description>coffee gift</description>
+      </basic_information>
+      <pricing currency="USD">
+        <current_price>1,600.00</current_price>
+        <original_price>1,800.00</original_price>
+        <discount_percentage>11.11</discount_percentage>
+        <savings>200.00</savings>
+      </pricing>
+      <category>
+        <name>Winter Wear</name>
+        <slug>winter-wear</slug>
+        <id>2</id>
+      </category>
+      <inventory>
+        <quantity>35</quantity>
+        <status>in_stock</status>
+      </inventory>
+      <media>
+        <image>
+          <url>/uploads/products/product_url_6873399d6c89c_1752381853.jpg</url>
+          <alt_text>coffee gift</alt_text>
+        </image>
+      </media>
+      <reviews>
+        <average_rating>0.00</average_rating>
+        <total_reviews>0</total_reviews>
+      </reviews>
+      <timestamps>
+        <created_at>2025-07-13 12:44:13</created_at>
+        <updated_at>2025-07-13 12:44:13</updated_at>
+      </timestamps>
+    </product>
+  </products>
+  <statistics>
+    <products>
+      <total>16</total>
+      <featured>3</featured>
+      <trending>6</trending>
+      <in_stock>16</in_stock>
+    </products>
+  </statistics>
+</urbanstitch_data>
