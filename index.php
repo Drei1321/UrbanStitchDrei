@@ -12,7 +12,11 @@ if (isset($_GET['ajax'])) {
         echo json_encode(['count' => 0, 'total' => 0]);
         exit;
     }
-    
+    // testing
+
+
+//testing 2
+
     
     $userId = $_SESSION['user_id'];
     
