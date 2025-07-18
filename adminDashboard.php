@@ -1581,15 +1581,15 @@ $recent_orders = $stmt->fetchAll();
 
 // Check XML file status
 $xmlStatus = [
-    'products' => file_exists(__DIR__ . '/xml/products.xml'),
-    'categories' => file_exists(__DIR__ . '/xml/categories.xml'),
-    'site_config' => file_exists(__DIR__ . '/xml/site_config.xml'),
-    'users_orders' => file_exists(__DIR__ . '/xml/users_orders.xml')
+    'products' => file_exists(__DIR__ . '../xml/products.xml'),
+    'categories' => file_exists(__DIR__ . '../xml/categories.xml'),
+    'site_config' => file_exists(__DIR__ . '../xml/site_config.xml'),
+    'users_orders' => file_exists(__DIR__ . '../xml/users_orders.xml')
 ];
 
 $xmlLastUpdate = '';
 if ($xmlStatus['products']) {
-    $xmlLastUpdate = date('Y-m-d H:i:s', filemtime(__DIR__ . '/xml/products.xml'));
+    $xmlLastUpdate = date('Y-m-d H:i:s', filemtime(__DIR__ . '../xml/products.xml'));
     // AJAX handlers for order management
     if (isset($_GET['action'])) {
         header('Content-Type: application/json');
