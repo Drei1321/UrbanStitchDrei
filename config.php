@@ -1,11 +1,20 @@
 <?php
-// Modified config.php - Keep database for users/auth, use XML for products/categories
+if ($serverName === 'localhost' || $serverName === '127.0.0.1') {
+    $host = 'localhost';
+    $username = 'root';
+    $password = '';
+    $database = 'urbanstitch_db';
+} else {
+    $db_host = 'localhost';
+    $username = 'u801377270_urbanstitch_db'; 
+    $password = 'Urbanstitch@2025'; 
+    $database = 'u801377270_urbanstitch_db'; 
+}
 
-// Database configuration (keep for user authentication and orders)
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'urbanstitch_db';
+
+
+
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
