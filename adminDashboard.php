@@ -3,8 +3,8 @@
 require_once 'config.php';
 require_once 'dynamic_xml_operations.php';
 
-// AJAX handlers for order management
-if (isset($_GET['action'])) {
+// AJAX handlers for order management - ONLY respond to order-related actions
+if (isset($_GET['action']) && in_array($_GET['action'], ['get_order_details', 'get_order_status'])) {
     header('Content-Type: application/json');
 
     switch ($_GET['action']) {
