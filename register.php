@@ -2,18 +2,32 @@
 session_start();
 
 // Use existing PHPMailer installation - Simple approach
-$phpmailer_available = false;
+// Try multiple paths for PHPMailer
+$phpmailer_paths = [
+    'PHPMailer/src/',
+    'PHPMailer\\src\\',
+    './PHPMailer/src/',
+    '../PHPMailer/src/',
+    'vendor/phpmailer/phpmailer/src/',
+    __DIR__ . '/PHPMailer/src/',
+    __DIR__ . '\\PHPMailer\\src\\'
+];
 
-// Check if PHPMailer files exist
-if (file_exists('PHPMailer/PHPMailer/src/PHPMailer.php')) {
-    try {
-        require_once 'PHPMailer/PHPMailer/src/PHPMailer.php';
-        require_once 'PHPMailer/PHPMailer/src/SMTP.php';
-        require_once 'PHPMailer/PHPMailer/src/Exception.php';
-        $phpmailer_available = true;
-    } catch (Exception $e) {
-        error_log("PHPMailer loading failed: " . $e->getMessage());
-        $phpmailer_available = false;
+foreach ($phpmailer_paths as $path) {
+    if (file_exists($path . 'PHPMailer.php') && 
+        file_exists($path . 'SMTP.php') && 
+        file_exists($path . 'Exception.php')) {
+        try {
+            require_once $path . 'PHPMailer.php';
+            require_once $path . 'SMTP.php';
+            require_once $path . 'Exception.php';
+            $phpmailer_available = true;
+            error_log("PHPMailer loaded successfully from: " . $path);
+            break;
+        } catch (Exception $e) {
+            error_log("PHPMailer loading failed from $path: " . $e->getMessage());
+            continue;
+        }
     }
 }
 
