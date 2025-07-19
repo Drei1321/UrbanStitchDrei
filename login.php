@@ -357,10 +357,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Admin Login Helper -->
-            <div class="admin-note">
-                <i class="fas fa-info-circle"></i>
-                <strong>Admin Access:</strong> admin / admin123
-            </div>
+           
 
             <?php if ($error): ?>
             <div class="error-message">
