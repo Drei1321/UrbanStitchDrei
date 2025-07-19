@@ -1698,22 +1698,7 @@ window.debugSidebars = function() {
         wishlistBtn.click();
     }
 }
-// Quick fix for login link
-document.addEventListener('DOMContentLoaded', function() {
-    const loginLink = document.querySelector('a.action-btn[href="login.php"]');
-    if (loginLink) {
-        // Remove any conflicting event listeners
-        loginLink.style.pointerEvents = 'auto';
-        loginLink.style.zIndex = '9999';
-        
-        // Ensure it works
-        loginLink.addEventListener('click', function(e) {
-            // Don't prevent default for login links
-            console.log('Login link clicked - redirecting...');
-            window.location.href = 'login.php';
-        });
-    }
-});
+
     </script>
 </body>
 </html>
