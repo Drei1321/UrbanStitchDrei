@@ -2007,14 +2007,3 @@ button:focus,
     margin: 0 auto 20px auto;
   }
 }
-/* Temporary fix for login link */
-a.action-btn[href="login.php"] {
-    pointer-events: auto !important;
-    z-index: 9999 !important;
-    position: relative !important;
-}
-
-a.action-btn[href="login.php"]:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    transform: scale(1.05) !important;
-}
