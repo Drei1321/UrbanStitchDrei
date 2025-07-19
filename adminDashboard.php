@@ -3,6 +3,82 @@
 require_once 'config.php';
 require_once 'dynamic_xml_operations.php';
 
+// AJAX handlers for order management
+if (isset($_GET['action'])) {
+    header('Content-Type: application/json');
+
+    switch ($_GET['action']) {
+        case 'get_order_details':
+            $orderId = (int)$_GET['order_id'];
+
+            try {
+                // Get order details
+                $stmt = $pdo->prepare("
+                    SELECT o.*, u.username, u.email, u.first_name, u.last_name
+                    FROM orders o
+                    LEFT JOIN users u ON o.user_id = u.id
+                    WHERE o.id = ?
+                ");
+                $stmt->execute([$orderId]);
+                $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if (!$order) {
+                    echo json_encode(['success' => false, 'message' => 'Order not found']);
+                    exit;
+                }
+
+                // Get order items
+                $stmt = $pdo->prepare("
+                    SELECT oi.*, p.name, p.image_url
+                    FROM order_items oi
+                    LEFT JOIN products p ON oi.product_id = p.id
+                    WHERE oi.order_id = ?
+                ");
+                $stmt->execute([$orderId]);
+                $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Get status history
+                $stmt = $pdo->prepare("
+                    SELECT osh.*, u.username as admin_username
+                    FROM order_status_history osh
+                    LEFT JOIN users u ON osh.admin_id = u.id
+                    WHERE osh.order_id = ?
+                    ORDER BY osh.created_at DESC
+                ");
+                $stmt->execute([$orderId]);
+                $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                echo json_encode([
+                    'success' => true,
+                    'order' => $order,
+                    'items' => $items,
+                    'history' => $history
+                ]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            }
+            exit;
+
+        case 'get_order_status':
+            $orderId = (int)$_GET['order_id'];
+
+            try {
+                $stmt = $pdo->prepare("SELECT status FROM orders WHERE id = ?");
+                $stmt->execute([$orderId]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result) {
+                    echo json_encode(['success' => true, 'status' => $result['status']]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Order not found']);
+                }
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            }
+            exit;
+    }
+}
+
 // Size Management System Classes
 class SizeManager
 {
