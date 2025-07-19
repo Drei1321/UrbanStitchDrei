@@ -41,6 +41,52 @@ $smtpPort = 587;
 $fromEmail = 'albaandrei0903@gmail.com';
 $fromName = 'UrbanStitch';
 
+// reCAPTCHA Configuration
+// Your actual reCAPTCHA keys (now that domains are properly configured)
+$recaptcha_site_key = '6LeryYcrAAAAAHtuRs2P_dbkUdBChomEm413FLBc';
+$recaptcha_secret_key = '6LeryYcrAAAAACta2qkkvyCXAhaSrmbyBaJEzo_6';
+
+// For testing only - Google's test keys
+// $recaptcha_site_key = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+// $recaptcha_secret_key = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
+// Function to verify reCAPTCHA
+function verifyRecaptcha($response) {
+    global $recaptcha_secret_key;
+    
+    if (empty($response)) {
+        error_log("reCAPTCHA: No response provided");
+        return false;
+    }
+    
+    $data = array(
+        'secret' => $recaptcha_secret_key,
+        'response' => $response,
+        'remoteip' => $_SERVER['REMOTE_ADDR']
+    );
+    
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+    
+    $context = stream_context_create($options);
+    $result = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+    
+    if ($result === FALSE) {
+        error_log("reCAPTCHA: Failed to contact Google API");
+        return false;
+    }
+    
+    $json = json_decode($result, true);
+    error_log("reCAPTCHA Response: " . print_r($json, true));
+    
+    return $json['success'] === true;
+}
+
 // Function to generate verification code
 function generateVerificationCode() {
     return sprintf('%06d', mt_rand(100000, 999999));
@@ -325,8 +371,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_password = $_POST['confirm_password'];
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
+    $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
     
-    if (empty($username) || empty($email) || empty($password) || empty($first_name) || empty($last_name)) {
+    // Validate reCAPTCHA first
+    if (!verifyRecaptcha($recaptcha_response)) {
+        $error = 'Please complete the reCAPTCHA verification.';
+    } elseif (empty($username) || empty($email) || empty($password) || empty($first_name) || empty($last_name)) {
         $error = 'Please fill in all required fields.';
     } elseif ($password !== $confirm_password) {
         $error = 'Passwords do not match.';
@@ -647,7 +697,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($success): ?>
             <div class="success-message">
                 <i class="fas fa-check-circle"></i>
-                <?php echo htmlspecialchars($success); ?>
+                <div><?php echo $success; ?></div>
             </div>
             <?php endif; ?>
 
@@ -699,7 +749,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- reCAPTCHA -->
                 <div class="recaptcha-container">
                     <div class="g-recaptcha" 
-                         data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
+                         data-sitekey="<?php echo $recaptcha_site_key; ?>" 
                          data-callback="enableSubmitButton"
                          data-expired-callback="disableSubmitButton"
                          data-theme="light">
@@ -770,7 +820,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // reCAPTCHA onload callback
         var onloadCallback = function() {
             grecaptcha.render(document.querySelector('.g-recaptcha'), {
-                'sitekey': '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+                'sitekey': '<?php echo $recaptcha_site_key; ?>',
                 'callback': enableSubmitButton,
                 'expired-callback': disableSubmitButton,
                 'theme': 'light'
