@@ -2,9 +2,31 @@
 // Print Order Page - UrbanStitch E-commerce
 require_once 'config.php';
 
+// Enhanced error handling and debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Don't display errors on the page
+ini_set('log_errors', 1);
+
+// Function to safely check if user is logged in
+function safeIsLoggedIn() {
+    if (function_exists('isLoggedIn')) {
+        return isLoggedIn();
+    }
+    // Fallback check
+    return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+}
+
 // Check if user is logged in
-if (!isLoggedIn()) {
-    header('Location: login.php');
+if (!safeIsLoggedIn()) {
+    ?>
+    <!DOCTYPE html>
+    <html><head><title>Access Denied</title></head>
+    <body style="font-family: Arial; text-align: center; padding: 50px;">
+        <h2>Access Denied</h2>
+        <p>You must be logged in to view this page.</p>
+        <a href="login.php">Login Here</a>
+    </body></html>
+    <?php
     exit;
 }
 
@@ -12,53 +34,165 @@ $userId = $_SESSION['user_id'];
 $orderId = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
 
 if (!$orderId) {
-    die('Invalid order ID');
+    ?>
+    <!DOCTYPE html>
+    <html><head><title>Invalid Order</title></head>
+    <body style="font-family: Arial; text-align: center; padding: 50px;">
+        <h2>Invalid Order ID</h2>
+        <p>Please provide a valid order ID.</p>
+        <a href="orders.php">Back to Orders</a>
+    </body></html>
+    <?php
+    exit;
 }
 
-// Get order details with user verification
+// Initialize variables
+$order = null;
+$orderItems = [];
+$errorMessage = '';
+
+// Get order details with enhanced error handling
 try {
-    $stmt = $pdo->prepare("
-        SELECT o.*, u.username, u.email, u.full_name
-        FROM orders o
-        JOIN users u ON o.user_id = u.id
-        WHERE o.id = ? AND o.user_id = ?
-    ");
-    $stmt->execute([$orderId, $userId]);
-    $order = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if (!$order) {
-        die('Order not found or access denied');
+    // Check database connection
+    if (!isset($pdo) || !($pdo instanceof PDO)) {
+        throw new Exception('Database connection not available');
     }
     
-    // Get order items
-    $stmt = $pdo->prepare("
-        SELECT oi.*, p.name, p.image_url, p.description
-        FROM order_items oi
-        JOIN products p ON oi.product_id = p.id
-        WHERE oi.order_id = ?
-        ORDER BY oi.id
-    ");
-    $stmt->execute([$orderId]);
-    $orderItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Try different query approaches based on available columns
+    $queries = [
+        // Full query with all user details
+        "SELECT o.*, u.username, u.email, u.full_name
+         FROM orders o
+         JOIN users u ON o.user_id = u.id
+         WHERE o.id = ? AND o.user_id = ?",
+        
+        // Fallback without full_name if column doesn't exist
+        "SELECT o.*, u.username, u.email, u.username as full_name
+         FROM orders o
+         JOIN users u ON o.user_id = u.id
+         WHERE o.id = ? AND o.user_id = ?",
+        
+        // Basic query with just order data
+        "SELECT o.*, '' as username, '' as email, '' as full_name
+         FROM orders o
+         WHERE o.id = ? AND o.user_id = ?"
+    ];
+    
+    $order = null;
+    foreach ($queries as $index => $sql) {
+        try {
+            $stmt = $pdo->prepare($sql);
+            if ($stmt && $stmt->execute([$orderId, $userId])) {
+                $order = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($order) {
+                    error_log("Print order: Query $index succeeded");
+                    break;
+                }
+            }
+        } catch (Exception $e) {
+            error_log("Print order: Query $index failed: " . $e->getMessage());
+            continue;
+        }
+    }
+    
+    if (!$order) {
+        // Check if order exists at all
+        try {
+            $checkStmt = $pdo->prepare("SELECT user_id FROM orders WHERE id = ?");
+            if ($checkStmt && $checkStmt->execute([$orderId])) {
+                $checkOrder = $checkStmt->fetch(PDO::FETCH_ASSOC);
+                if ($checkOrder) {
+                    $errorMessage = 'Access denied - This order belongs to another user';
+                } else {
+                    $errorMessage = 'Order not found in database';
+                }
+            } else {
+                $errorMessage = 'Unable to verify order existence';
+            }
+        } catch (Exception $e) {
+            $errorMessage = 'Database error during order verification';
+        }
+    } else {
+        // Get order items with fallback queries
+        $itemQueries = [
+            // Full query with product details
+            "SELECT oi.*, p.name, p.image_url, p.description
+             FROM order_items oi
+             JOIN products p ON oi.product_id = p.id
+             WHERE oi.order_id = ?
+             ORDER BY oi.id",
+            
+            // Fallback without product description
+            "SELECT oi.*, p.name, p.image_url, '' as description
+             FROM order_items oi
+             JOIN products p ON oi.product_id = p.id
+             WHERE oi.order_id = ?
+             ORDER BY oi.id",
+            
+            // Basic query without product join
+            "SELECT oi.*, 'Product Name Not Available' as name, '' as image_url, '' as description
+             FROM order_items oi
+             WHERE oi.order_id = ?
+             ORDER BY oi.id"
+        ];
+        
+        foreach ($itemQueries as $index => $sql) {
+            try {
+                $stmt = $pdo->prepare($sql);
+                if ($stmt && $stmt->execute([$orderId])) {
+                    $orderItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    error_log("Print order: Items query $index succeeded, found " . count($orderItems) . " items");
+                    break;
+                }
+            } catch (Exception $e) {
+                error_log("Print order: Items query $index failed: " . $e->getMessage());
+                continue;
+            }
+        }
+    }
     
 } catch (Exception $e) {
-    error_log("Error loading order for print: " . $e->getMessage());
-    die('Error loading order details');
+    error_log("Print order: Critical error: " . $e->getMessage());
+    $errorMessage = 'Unable to load order details due to system error';
 }
 
-// Calculate totals
+// If we have an error, show error page
+if (!$order || $errorMessage) {
+    ?>
+    <!DOCTYPE html>
+    <html><head><title>Order Error</title></head>
+    <body style="font-family: Arial; text-align: center; padding: 50px;">
+        <h2>Unable to Load Order</h2>
+        <p><?php echo htmlspecialchars($errorMessage ?: 'Order not found or access denied'); ?></p>
+        <p><strong>Order ID:</strong> <?php echo $orderId; ?></p>
+        <p><strong>User ID:</strong> <?php echo $userId; ?></p>
+        <div style="margin-top: 30px;">
+            <a href="orders.php" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Back to Orders</a>
+            <button onclick="window.close()" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-left: 10px;">Close Window</button>
+        </div>
+    </body></html>
+    <?php
+    exit;
+}
+
+// Calculate totals with safety checks
 $subtotal = 0;
-foreach ($orderItems as $item) {
-    $subtotal += $item['quantity'] * $item['price'];
+if (!empty($orderItems)) {
+    foreach ($orderItems as $item) {
+        $quantity = isset($item['quantity']) ? (float)$item['quantity'] : 0;
+        $price = isset($item['price']) ? (float)$item['price'] : 0;
+        $subtotal += $quantity * $price;
+    }
 }
 
 $shipping = 0; // No shipping in your structure
 $tax = 0; // No tax in your structure
 $discount = 0; // No discount in your structure
-$total = $order['total_amount'];
+$total = isset($order['total_amount']) ? (float)$order['total_amount'] : $subtotal;
 
-// Helper function for status display
+// Helper function for status display with safe defaults
 function getStatusDisplay($status) {
+    $status = $status ?: 'unknown';
     $statuses = [
         'pending' => ['text' => 'Pending Review', 'color' => '#ffc107'],
         'confirmed' => ['text' => 'Payment Confirmed', 'color' => '#17a2b8'],
@@ -72,7 +206,28 @@ function getStatusDisplay($status) {
     return $statuses[$status] ?? ['text' => ucfirst($status), 'color' => '#6c757d'];
 }
 
-$statusDisplay = getStatusDisplay($order['status']);
+// Safe data extraction with defaults
+$orderNumber = isset($order['order_number']) ? $order['order_number'] : 'N/A';
+$orderStatus = isset($order['status']) ? $order['status'] : 'unknown';
+$createdAt = isset($order['created_at']) ? $order['created_at'] : date('Y-m-d H:i:s');
+$customerName = '';
+
+// Try different name combinations
+if (!empty($order['full_name'])) {
+    $customerName = $order['full_name'];
+} elseif (!empty($order['username'])) {
+    $customerName = $order['username'];
+} else {
+    $customerName = 'Customer #' . $userId;
+}
+
+$customerEmail = isset($order['email']) ? $order['email'] : 'Not available';
+$paymentMethod = isset($order['payment_method']) ? ucfirst($order['payment_method']) : 'Not specified';
+$shippingAddress = isset($order['shipping_address']) ? $order['shipping_address'] : '';
+$adminNotes = isset($order['admin_notes']) ? $order['admin_notes'] : '';
+$statusUpdatedAt = isset($order['status_updated_at']) ? $order['status_updated_at'] : $createdAt;
+
+$statusDisplay = getStatusDisplay($orderStatus);
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +235,7 @@ $statusDisplay = getStatusDisplay($order['status']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order #<?php echo htmlspecialchars($order['order_number']); ?> - UrbanStitch</title>
+    <title>Order #<?php echo htmlspecialchars($orderNumber); ?> - UrbanStitch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and base styles */
@@ -468,8 +623,8 @@ $statusDisplay = getStatusDisplay($order['status']);
             </div>
             <div class="invoice-title">
                 <h2>INVOICE</h2>
-                <div class="invoice-number">Order #<?php echo htmlspecialchars($order['order_number']); ?></div>
-                <div class="invoice-date"><?php echo date('F j, Y', strtotime($order['created_at'])); ?></div>
+                <div class="invoice-number">Order #<?php echo htmlspecialchars($orderNumber); ?></div>
+                <div class="invoice-date"><?php echo date('F j, Y', strtotime($createdAt)); ?></div>
                 <div class="status-badge" style="background-color: <?php echo $statusDisplay['color']; ?>; border-color: <?php echo $statusDisplay['color']; ?>; color: white;">
                     <?php echo $statusDisplay['text']; ?>
                 </div>
@@ -482,20 +637,20 @@ $statusDisplay = getStatusDisplay($order['status']);
                 <h3>Bill To</h3>
                 <div class="detail-item">
                     <span class="detail-label">Customer Name</span>
-                    <span class="detail-value"><?php echo htmlspecialchars($order['full_name'] ?: $order['username']); ?></span>
+                    <span class="detail-value"><?php echo htmlspecialchars($customerName); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Email</span>
-                    <span class="detail-value"><?php echo htmlspecialchars($order['email']); ?></span>
+                    <span class="detail-value"><?php echo htmlspecialchars($customerEmail); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Customer ID</span>
-                    <span class="detail-value">#<?php echo str_pad($order['user_id'], 6, '0', STR_PAD_LEFT); ?></span>
+                    <span class="detail-value">#<?php echo str_pad($userId, 6, '0', STR_PAD_LEFT); ?></span>
                 </div>
-                <?php if (!empty($order['shipping_address'])): ?>
+                <?php if (!empty($shippingAddress)): ?>
                 <div class="detail-item">
                     <span class="detail-label">Shipping Address</span>
-                    <span class="detail-value"><?php echo nl2br(htmlspecialchars($order['shipping_address'])); ?></span>
+                    <span class="detail-value"><?php echo nl2br(htmlspecialchars($shippingAddress)); ?></span>
                 </div>
                 <?php endif; ?>
             </div>
@@ -504,20 +659,20 @@ $statusDisplay = getStatusDisplay($order['status']);
                 <h3>Order Information</h3>
                 <div class="detail-item">
                     <span class="detail-label">Order Date</span>
-                    <span class="detail-value"><?php echo date('F j, Y g:i A', strtotime($order['created_at'])); ?></span>
+                    <span class="detail-value"><?php echo date('F j, Y g:i A', strtotime($createdAt)); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Payment Method</span>
-                    <span class="detail-value"><?php echo ucfirst($order['payment_method']); ?></span>
+                    <span class="detail-value"><?php echo htmlspecialchars($paymentMethod); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Order Status</span>
                     <span class="detail-value"><?php echo $statusDisplay['text']; ?></span>
                 </div>
-                <?php if (!empty($order['status_updated_at'])): ?>
+                <?php if (!empty($statusUpdatedAt) && $statusUpdatedAt !== $createdAt): ?>
                 <div class="detail-item">
                     <span class="detail-label">Last Updated</span>
-                    <span class="detail-value"><?php echo date('F j, Y g:i A', strtotime($order['status_updated_at'])); ?></span>
+                    <span class="detail-value"><?php echo date('F j, Y g:i A', strtotime($statusUpdatedAt)); ?></span>
                 </div>
                 <?php endif; ?>
             </div>
@@ -535,28 +690,44 @@ $statusDisplay = getStatusDisplay($order['status']);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($orderItems as $item): ?>
+                <?php if (!empty($orderItems)): ?>
+                <?php foreach ($orderItems as $item): 
+                    $itemName = isset($item['name']) ? $item['name'] : 'Product Name Not Available';
+                    $itemImage = isset($item['image_url']) ? $item['image_url'] : '';
+                    $itemDescription = isset($item['description']) ? $item['description'] : '';
+                    $itemQuantity = isset($item['quantity']) ? (int)$item['quantity'] : 1;
+                    $itemPrice = isset($item['price']) ? (float)$item['price'] : 0;
+                    $itemSize = isset($item['selected_size']) ? $item['selected_size'] : '';
+                ?>
                 <tr>
                     <td class="text-center">
-                        <img src="<?php echo htmlspecialchars($item['image_url'] ?: 'https://via.placeholder.com/50x50?text=No+Image'); ?>" 
-                             alt="<?php echo htmlspecialchars($item['name']); ?>" 
+                        <img src="<?php echo htmlspecialchars($itemImage ?: 'https://via.placeholder.com/50x50?text=No+Image'); ?>" 
+                             alt="<?php echo htmlspecialchars($itemName); ?>" 
                              class="item-image"
                              onerror="this.src='https://via.placeholder.com/50x50?text=No+Image'">
                     </td>
                     <td>
-                        <div class="item-name"><?php echo htmlspecialchars($item['name']); ?></div>
-                        <?php if (!empty($item['description'])): ?>
-                        <div class="item-description"><?php echo htmlspecialchars(substr($item['description'], 0, 100)) . (strlen($item['description']) > 100 ? '...' : ''); ?></div>
+                        <div class="item-name"><?php echo htmlspecialchars($itemName); ?></div>
+                        <?php if (!empty($itemDescription)): ?>
+                        <div class="item-description"><?php echo htmlspecialchars(substr($itemDescription, 0, 100)) . (strlen($itemDescription) > 100 ? '...' : ''); ?></div>
                         <?php endif; ?>
-                        <?php if (!empty($item['selected_size'])): ?>
-                        <div class="item-description">Size: <?php echo htmlspecialchars($item['selected_size']); ?></div>
+                        <?php if (!empty($itemSize)): ?>
+                        <div class="item-description">Size: <?php echo htmlspecialchars($itemSize); ?></div>
                         <?php endif; ?>
                     </td>
-                    <td class="text-center font-weight-bold"><?php echo $item['quantity']; ?></td>
-                    <td class="text-right">₱<?php echo number_format($item['price'], 2); ?></td>
-                    <td class="text-right font-weight-bold">₱<?php echo number_format($item['quantity'] * $item['price'], 2); ?></td>
+                    <td class="text-center font-weight-bold"><?php echo $itemQuantity; ?></td>
+                    <td class="text-right">₱<?php echo number_format($itemPrice, 2); ?></td>
+                    <td class="text-right font-weight-bold">₱<?php echo number_format($itemQuantity * $itemPrice, 2); ?></td>
                 </tr>
                 <?php endforeach; ?>
+                <?php else: ?>
+                <tr>
+                    <td colspan="5" class="text-center" style="padding: 40px; color: #666;">
+                        <i class="fas fa-box-open" style="font-size: 48px; display: block; margin-bottom: 16px; opacity: 0.5;"></i>
+                        No items found for this order
+                    </td>
+                </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
@@ -591,10 +762,10 @@ $statusDisplay = getStatusDisplay($order['status']);
         </div>
 
         <!-- Order Notes (if any) -->
-        <?php if (!empty($order['admin_notes'])): ?>
+        <?php if (!empty($adminNotes)): ?>
         <div class="notes-section">
             <div class="notes-title">Order Notes:</div>
-            <div class="notes-content"><?php echo nl2br(htmlspecialchars($order['admin_notes'])); ?></div>
+            <div class="notes-content"><?php echo nl2br(htmlspecialchars($adminNotes)); ?></div>
         </div>
         <?php endif; ?>
 
