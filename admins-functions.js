@@ -2268,3 +2268,366 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('Enhanced UrbanStitch Admin System initialized with Size Management');
 });
+// =====================================
+// ORDER MANAGEMENT FUNCTIONS - ADD TO admins-functions.js
+// =====================================
+
+/**
+ * View order details in modal
+ */
+async function viewOrderDetails(orderId) {
+    const modal = document.getElementById('orderDetailsModal');
+    const title = document.getElementById('orderDetailsTitle');
+    const content = document.getElementById('orderDetailsContent');
+
+    title.textContent = 'Loading Order Details...';
+    content.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+    showModal('orderDetailsModal');
+
+    try {
+        // Use the correct action parameter for adminDashboard.php
+        const response = await fetch(`adminDashboard.php?action=get_order_details&order_id=${orderId}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+
+        if (data.success) {
+            title.textContent = `Order Details - ${data.order.order_number || '#' + orderId}`;
+            content.innerHTML = generateOrderDetailsHTML(data.order, data.items, data.history);
+        } else {
+            content.innerHTML = '<div style="color: #ff4444; text-align: center; padding: 40px;">Failed to load order details: ' + (data.message || 'Unknown error') + '</div>';
+        }
+    } catch (error) {
+        console.error('Error loading order details:', error);
+        content.innerHTML = '<div style="color: #ff4444; text-align: center; padding: 40px;">Error loading order details: ' + error.message + '</div>';
+    }
+}
+
+/**
+ * Generate order details HTML
+ */
+function generateOrderDetailsHTML(order, items, history) {
+    const billingInfo = order.billing_info ? JSON.parse(order.billing_info) : {};
+    const statusBadgeClass = getStatusBadgeClass(order.status);
+
+    let html = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+            <div>
+                <h4>Order Information</h4>
+                <div style="background: #f8f9fa; padding: 16px; border-radius: 8px;">
+                    <div style="margin-bottom: 8px;"><strong>Order Number:</strong> ${order.order_number || '#' + order.id}</div>
+                    <div style="margin-bottom: 8px;"><strong>Date:</strong> ${new Date(order.created_at).toLocaleDateString()}</div>
+                    <div style="margin-bottom: 8px;"><strong>Status:</strong> <span class="badge ${statusBadgeClass}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span></div>
+                    <div style="margin-bottom: 8px;"><strong>Total:</strong> ₱${parseFloat(order.total_amount).toFixed(2)}</div>
+                    <div style="margin-bottom: 8px;"><strong>Payment:</strong> ${order.payment_method.toUpperCase()}</div>
+                </div>
+            </div>
+            
+            <div>
+                <h4>Customer Information</h4>
+                <div style="background: #f8f9fa; padding: 16px; border-radius: 8px;">
+                    <div style="margin-bottom: 8px;"><strong>Name:</strong> ${order.first_name || ''} ${order.last_name || ''}</div>
+                    <div style="margin-bottom: 8px;"><strong>Email:</strong> ${order.email || ''}</div>
+                    <div style="margin-bottom: 8px;"><strong>Username:</strong> ${order.username || ''}</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    if (order.gcash_number) {
+        html += `
+            <div style="margin-bottom: 24px;">
+                <h4>GCash Payment Information</h4>
+                <div style="background: #e3f2fd; padding: 16px; border-radius: 8px; border-left: 4px solid #2196f3;">
+                    <div style="margin-bottom: 8px;"><strong>GCash Number:</strong> ${order.gcash_number}</div>
+                    <div style="margin-bottom: 8px;"><strong>Reference Number:</strong> ${order.gcash_reference || 'N/A'}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Order Items Section
+    if (items && items.length > 0) {
+        html += `
+            <div style="margin-bottom: 24px;">
+                <h4>Order Items</h4>
+                <table class="table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f8f9fa;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Product</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Quantity</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Price</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        items.forEach(item => {
+            html += `
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            ${item.image_url ? `<img src="${item.image_url}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">` : ''}
+                            <span>${item.name || 'Unknown Product'}</span>
+                        </div>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${item.quantity}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">₱${parseFloat(item.price).toFixed(2)}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">₱${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</td>
+                </tr>
+            `;
+        });
+        
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    // Order History Section
+    if (history && history.length > 0) {
+        html += `
+            <div style="margin-bottom: 24px;">
+                <h4>Order Status History</h4>
+                <div style="background: #f8f9fa; padding: 16px; border-radius: 8px;">
+        `;
+        
+        history.forEach(record => {
+            html += `
+                <div style="margin-bottom: 12px; padding: 8px; border-left: 3px solid #007bff; background: white;">
+                    <div><strong>${record.old_status}</strong> → <strong>${record.new_status}</strong></div>
+                    <div style="font-size: 12px; color: #666;">
+                        By: ${record.admin_username || 'Admin'} on ${new Date(record.created_at).toLocaleString()}
+                    </div>
+                    ${record.admin_notes ? `<div style="font-style: italic; margin-top: 4px;">"${record.admin_notes}"</div>` : ''}
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+            </div>
+        `;
+    }
+
+    return html;
+}
+
+/**
+ * Update order status
+ */
+function updateOrderStatus(orderId) {
+    // First get current order info
+    fetch(`adminDashboard.php?action=get_order_status&order_id=${orderId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('updateOrderId').value = orderId;
+                document.getElementById('currentOrderStatus').innerHTML = `
+                    <span class="badge ${getStatusBadgeClass(data.status)}">
+                        ${data.status.charAt(0).toUpperCase() + data.status.slice(1)}
+                    </span>
+                `;
+                document.getElementById('adminNotesField').value = '';
+                document.getElementById('notifyCustomer').checked = true;
+
+                showModal('updateOrderStatusModal');
+            } else {
+                showAdminNotification('Failed to load order information', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error getting order status:', error);
+            showAdminNotification('Failed to load order information', 'error');
+        });
+}
+
+/**
+ * Save order status update
+ */
+function saveOrderStatus() {
+    const orderId = document.getElementById('updateOrderId').value;
+    const newStatus = document.getElementById('newOrderStatus').value;
+    const adminNotes = document.getElementById('adminNotesField').value || '';
+    const notifyCustomer = document.getElementById('notifyCustomer').checked;
+
+    if (!orderId || !newStatus) {
+        showAdminNotification('Please select a valid status', 'error');
+        return;
+    }
+
+    // Show loading state
+    const form = document.getElementById('updateOrderStatusForm');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+    submitBtn.disabled = true;
+
+    // Create form data with correct parameter names
+    const formData = new FormData();
+    formData.append('action', 'update_order_status');
+    formData.append('order_id', orderId);
+    formData.append('new_status', newStatus);
+    formData.append('admin_notes', adminNotes);
+    if (notifyCustomer) {
+        formData.append('notify_customer', '1');
+    }
+
+    // Send AJAX request
+    fetch('adminDashboard.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(text => {
+        console.log('Raw response:', text);
+        
+        // Check if response contains JSON
+        try {
+            const data = JSON.parse(text);
+            if (data.success !== false) {
+                hideModal('updateOrderStatusModal');
+                showAdminNotification('Order status updated successfully!', 'success');
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                showAdminNotification(data.message || 'Failed to update order status', 'error');
+            }
+        } catch (e) {
+            // If not JSON, assume success if no error in response
+            if (!text.includes('error') && !text.includes('Error')) {
+                hideModal('updateOrderStatusModal');
+                showAdminNotification('Order status updated successfully!', 'success');
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                showAdminNotification('Error updating order status', 'error');
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showAdminNotification('Network error. Please try again.', 'error');
+    })
+    .finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+}
+
+/**
+ * Get status badge class
+ */
+function getStatusBadgeClass(status) {
+    const statusClasses = {
+        'pending': 'badge-warning',
+        'confirmed': 'badge-info',
+        'processing': 'badge-primary',
+        'shipped': 'badge-secondary',
+        'delivered': 'badge-success',
+        'completed': 'badge-success',
+        'cancelled': 'badge-danger'
+    };
+    return statusClasses[status] || 'badge-secondary';
+}
+
+/**
+ * Filter orders by status
+ */
+function filterOrders() {
+    const filter = document.getElementById('orderStatusFilter').value;
+    const rows = document.querySelectorAll('#ordersTableBody tr');
+
+    rows.forEach(row => {
+        const status = row.getAttribute('data-status');
+        if (filter === 'all' || filter === status) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+/**
+ * Export orders (placeholder)
+ */
+function exportOrders() {
+    showAdminNotification('Export feature - this would generate a CSV/PDF of orders', 'info');
+}
+
+/**
+ * Enhanced notification function for admin
+ */
+function showAdminNotification(message, type = 'info') {
+    // Remove any existing notifications first
+    const existingNotifications = document.querySelectorAll('.admin-notification');
+    existingNotifications.forEach(notif => notif.remove());
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `admin-notification alert alert-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+        max-width: 350px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        animation: slideInRight 0.3s ease;
+        font-weight: 600;
+    `;
+
+    const bgColors = {
+        success: '#d4edda',
+        error: '#f8d7da',
+        warning: '#fff3cd',
+        info: '#d1ecf1'
+    };
+
+    const textColors = {
+        success: '#155724',
+        error: '#721c24',
+        warning: '#856404',
+        info: '#0c5460'
+    };
+
+    notification.style.backgroundColor = bgColors[type] || bgColors.info;
+    notification.style.color = textColors[type] || textColors.info;
+    notification.style.border = `1px solid ${textColors[type] || textColors.info}`;
+
+    notification.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>${message}</span>
+            <button type="button" onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; font-size: 18px; cursor: pointer; margin-left: 10px; color: inherit;">
+                &times;
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Auto remove after 4 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 4000);
+}
+
+// Add event listener for order status form submission
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle order status form submission
+    const orderStatusForm = document.getElementById('updateOrderStatusForm');
+    if (orderStatusForm) {
+        orderStatusForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveOrderStatus();
+        });
+    }
+});
