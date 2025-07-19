@@ -1305,142 +1305,150 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
         case 'update_order_status':
-            $order_id = (int)$_POST['order_id'];
-            $new_status = $_POST['new_status'];
-            $admin_notes = trim($_POST['admin_notes'] ?? '');
-            $notify_customer = isset($_POST['notify_customer']);
-            $admin_id = $_SESSION['user_id'];
+    $order_id = (int)$_POST['order_id'];
+    $new_status = $_POST['new_status'];
+    $admin_notes = trim($_POST['admin_notes'] ?? '');
+    $notify_customer = isset($_POST['notify_customer']);
+    $admin_id = $_SESSION['user_id'];
 
-            try {
-                // Validate status
-                $validStatuses = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'completed', 'cancelled'];
-                if (!in_array($new_status, $validStatuses)) {
-                    throw new Exception('Invalid status');
-                }
+    try {
+        // Validate status
+        $validStatuses = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'completed', 'cancelled'];
+        if (!in_array($new_status, $validStatuses)) {
+            throw new Exception('Invalid status');
+        }
 
-                // Get current order info with customer details
-                $stmt = $pdo->prepare("
-            SELECT o.*, u.email, u.first_name, u.last_name, u.username,
-                   GROUP_CONCAT(
-                       JSON_OBJECT(
-                           'name', p.name,
-                           'quantity', oi.quantity,
-                           'price', oi.price
-                       )
-                   ) as order_items_json
+        // Get current order info with customer details (SIMPLIFIED VERSION)
+        $stmt = $pdo->prepare("
+            SELECT o.*, u.email, u.first_name, u.last_name, u.username
             FROM orders o 
             JOIN users u ON o.user_id = u.id 
-            LEFT JOIN order_items oi ON o.id = oi.order_id
-            LEFT JOIN products p ON oi.product_id = p.id
             WHERE o.id = ?
-            GROUP BY o.id
         ");
-                $stmt->execute([$order_id]);
-                $order = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute([$order_id]);
+        $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if (!$order) {
-                    throw new Exception('Order not found');
-                }
+        if (!$order) {
+            throw new Exception('Order not found');
+        }
 
-                $old_status = $order['status'];
+        $old_status = $order['status'];
 
-                // Don't update if status is the same
-                if ($old_status === $new_status) {
-                    $message = 'Order status is already ' . ucfirst($new_status);
-                    $messageType = 'warning';
-                    break;
-                }
+        // Don't update if status is the same
+        if ($old_status === $new_status) {
+            $message = 'Order status is already ' . ucfirst($new_status);
+            $messageType = 'warning';
+            break;
+        }
 
-                // Get admin info for email
-                $stmt = $pdo->prepare("SELECT username, first_name, last_name FROM users WHERE id = ?");
-                $stmt->execute([$admin_id]);
-                $admin_info = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Get admin info for email
+        $stmt = $pdo->prepare("SELECT username, first_name, last_name FROM users WHERE id = ?");
+        $stmt->execute([$admin_id]);
+        $admin_info = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                $pdo->beginTransaction();
+        $pdo->beginTransaction();
 
-                // Update order status
-                $stmt = $pdo->prepare("
+        // Update order status
+        $stmt = $pdo->prepare("
             UPDATE orders 
             SET status = ?, admin_notes = ?, status_updated_at = NOW(), updated_by_admin = ?
             WHERE id = ?
         ");
-                if (!$stmt->execute([$new_status, $admin_notes, $admin_id, $order_id])) {
-                    throw new Exception('Failed to update order status');
-                }
+        if (!$stmt->execute([$new_status, $admin_notes, $admin_id, $order_id])) {
+            throw new Exception('Failed to update order status');
+        }
 
-                // Log status change in history
-                $stmt = $pdo->prepare("
-            INSERT INTO order_status_history (order_id, old_status, new_status, admin_id, admin_notes) 
-            VALUES (?, ?, ?, ?, ?)
-        ");
-                if (!$stmt->execute([$order_id, $old_status, $new_status, $admin_id, $admin_notes])) {
-                    throw new Exception('Failed to log status change');
-                }
-
-                $pdo->commit();
-
-                // Send email notification if requested
-                $email_result = null;
-                if ($notify_customer && !empty($order['email'])) {
-                    // Include the EmailService
-                    require_once 'email_service.php';
-                    $emailService = new EmailService();
-
-                    // Parse order items JSON
-                    $order_items = [];
-                    if (!empty($order['order_items_json'])) {
-                        $items_json = json_decode('[' . $order['order_items_json'] . ']', true);
-                        if ($items_json) {
-                            $order_items = $items_json;
-                        }
-                    }
-
-                    // Prepare order data for email
-                    $orderData = [
-                        'order_number' => $order['order_number'] ?? '#' . str_pad($order['id'], 6, '0', STR_PAD_LEFT),
-                        'customer_name' => trim(($order['first_name'] ?? '') . ' ' . ($order['last_name'] ?? '')),
-                        'email' => $order['email'],
-                        'total_amount' => $order['total_amount'],
-                        'payment_method' => $order['payment_method'],
-                        'created_at' => $order['created_at'],
-                        'items' => $order_items
-                    ];
-
-                    // Send the email
-                    $email_result = $emailService->sendOrderStatusUpdate(
-                        $orderData,
-                        $new_status,
-                        $admin_notes,
-                        $admin_info
-                    );
-                }
-
-                // Build success message
-                $message = "Order status updated from '" . ucfirst($old_status) . "' to '" . ucfirst($new_status) . "' successfully!";
-
-                if ($notify_customer) {
-                    if ($email_result && $email_result['success']) {
-                        if ($email_result['mode'] === 'development') {
-                            $message .= " Email notification logged (Development Mode).";
-                        } else {
-                            $message .= " Customer has been notified via email.";
-                        }
-                    } elseif ($email_result) {
-                        $message .= " Warning: " . $email_result['message'];
-                    } else {
-                        $message .= " Note: Email notification was requested but not processed.";
-                    }
-                }
-
-                $messageType = 'success';
-            } catch (Exception $e) {
-                if ($pdo->inTransaction()) {
-                    $pdo->rollBack();
-                }
-                $message = 'Failed to update order status: ' . $e->getMessage();
-                $messageType = 'error';
+        // Insert into history table with auto_increment fix
+        try {
+            $stmt = $pdo->prepare("
+                INSERT INTO order_status_history (order_id, old_status, new_status, admin_id, admin_notes) 
+                VALUES (?, ?, ?, ?, ?)
+            ");
+            if (!$stmt->execute([$order_id, $old_status, $new_status, $admin_id, $admin_notes])) {
+                throw new Exception('Failed to log status change');
             }
-            break;
+        } catch (Exception $historyError) {
+            // If we get a duplicate entry error, fix auto_increment and retry
+            if (strpos($historyError->getMessage(), 'Duplicate entry') !== false || 
+                strpos($historyError->getMessage(), '1062') !== false) {
+                
+                error_log("Fixing auto_increment and retrying history insert");
+                
+                // Fix the auto_increment
+                $maxIdResult = $pdo->query("SELECT MAX(id) as max_id FROM order_status_history");
+                $maxId = $maxIdResult ? $maxIdResult->fetch(PDO::FETCH_ASSOC)['max_id'] ?? 0 : 0;
+                $newAutoIncrement = $maxId + 1;
+                
+                $pdo->exec("ALTER TABLE order_status_history AUTO_INCREMENT = $newAutoIncrement");
+                
+                // Retry the insert
+                $stmt = $pdo->prepare("
+                    INSERT INTO order_status_history (order_id, old_status, new_status, admin_id, admin_notes) 
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+                if (!$stmt->execute([$order_id, $old_status, $new_status, $admin_id, $admin_notes])) {
+                    throw new Exception('Failed to log status change even after auto_increment fix');
+                }
+            } else {
+                throw $historyError;
+            }
+        }
+
+        $pdo->commit();
+
+        // Send email notification if requested
+        $email_result = null;
+        if ($notify_customer && !empty($order['email'])) {
+            // Include the EmailService if not already included
+            if (!class_exists('EmailService')) {
+                require_once 'email_service.php';
+            }
+            
+            $emailService = new EmailService();
+            
+            // Prepare order data for email
+            $orderData = [
+                'order_number' => $order['order_number'] ?? '#' . str_pad($order['id'], 6, '0', STR_PAD_LEFT),
+                'customer_name' => trim(($order['first_name'] ?? '') . ' ' . ($order['last_name'] ?? '')),
+                'email' => $order['email'],
+                'total_amount' => $order['total_amount'],
+                'payment_method' => $order['payment_method'],
+                'created_at' => $order['created_at'],
+                'items' => [] // You can add order items here if needed
+            ];
+
+            // Send the email using your existing EmailService
+            $email_result = $emailService->sendOrderStatusUpdate($orderData, $new_status, $admin_notes, $admin_info);
+        }
+
+        // Build success message
+        $message = "Order status updated from '" . ucfirst($old_status) . "' to '" . ucfirst($new_status) . "' successfully!";
+
+        if ($notify_customer) {
+            if ($email_result && $email_result['success']) {
+                if ($email_result['mode'] === 'development') {
+                    $message .= " Email logged (Development Mode).";
+                } else {
+                    $message .= " Customer notified via email.";
+                }
+            } elseif ($email_result) {
+                $message .= " Warning: " . $email_result['message'];
+            } else {
+                $message .= " Note: Email notification was requested but not processed.";
+            }
+        }
+
+        $messageType = 'success';
+        
+    } catch (Exception $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        error_log("Order status update error: " . $e->getMessage());
+        $message = 'Failed to update order status: ' . $e->getMessage();
+        $messageType = 'error';
+    }
+    break;
 
         case 'verify_admin_password':
             // Set JSON header immediately

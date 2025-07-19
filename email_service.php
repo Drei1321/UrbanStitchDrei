@@ -14,19 +14,58 @@ class EmailService {
     }
 
     private function checkPHPMailerAvailability() {
-        // Check if PHPMailer files exist
-        if (file_exists('C:\Users\jopet\OneDrive\Desktop\xmpp\PHPMailer\PHPMailer\src\PHPMailer.php')) {
+    $phpmailer_available = false;
+    
+    // Try multiple paths for PHPMailer (remove hardcoded Windows path)
+    $phpmailer_paths = [
+        'PHPMailer/src/',
+        'PHPMailer\\src\\',
+        './PHPMailer/src/',
+        '../PHPMailer/src/',
+        'vendor/phpmailer/phpmailer/src/',
+        __DIR__ . '/PHPMailer/src/',
+        __DIR__ . '\\PHPMailer\\src\\',
+        __DIR__ . '/../PHPMailer/src/',
+        __DIR__ . '\\..\\PHPMailer\\src\\',
+        'includes/PHPMailer/src/',
+        'lib/PHPMailer/src/',
+        'libraries/PHPMailer/src/',
+        'C:\\Users\\jopet\\OneDrive\\Desktop\\xmpp\\PHPMailer\\PHPMailer\\src\\' // Keep your current path as fallback
+    ];
+    
+    foreach ($phpmailer_paths as $path) {
+        $phpmailer_file = $path . 'PHPMailer.php';
+        $smtp_file = $path . 'SMTP.php';
+        $exception_file = $path . 'Exception.php';
+        
+        // Check if all required PHPMailer files exist in this path
+        if (file_exists($phpmailer_file) && file_exists($smtp_file) && file_exists($exception_file)) {
             try {
-                require_once 'C:\Users\jopet\OneDrive\Desktop\xmpp\PHPMailer\PHPMailer\src\PHPMailer.php';
-                require_once 'C:\Users\jopet\OneDrive\Desktop\xmpp\PHPMailer\PHPMailer\src\SMTP.php';
-                require_once 'C:\Users\jopet\OneDrive\Desktop\xmpp\PHPMailer\PHPMailer\src\Exception.php';
+                require_once $phpmailer_file;
+                require_once $smtp_file;
+                require_once $exception_file;
+                
                 $this->phpmailerAvailable = true;
+                $phpmailer_available = true;
+                
+                // Log successful path for debugging
+                error_log("PHPMailer loaded successfully from: " . $path);
+                break;
+                
             } catch (Exception $e) {
-                error_log("PHPMailer loading failed: " . $e->getMessage());
-                $this->phpmailerAvailable = false;
+                error_log("PHPMailer loading failed from path '$path': " . $e->getMessage());
+                continue;
             }
         }
     }
+    
+    if (!$phpmailer_available) {
+        error_log("PHPMailer not found in any of the attempted paths");
+        $this->phpmailerAvailable = false;
+    }
+    
+    return $phpmailer_available;
+}
 
     /**
      * Send order status update email to customer
