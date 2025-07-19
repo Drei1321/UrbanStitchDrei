@@ -1699,6 +1699,114 @@ window.debugSidebars = function() {
     }
 }
 
+
+// URGENT FIX: Force login link to work
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("🔧 Applying login link fix...");
+    
+    // Wait a bit for other scripts to load
+    setTimeout(function() {
+        const loginLink = document.querySelector('a.action-btn[href="login.php"]');
+        
+        if (loginLink) {
+            console.log("✅ Login link found:", loginLink);
+            
+            // Remove all existing event listeners by cloning the element
+            const newLoginLink = loginLink.cloneNode(true);
+            loginLink.parentNode.replaceChild(newLoginLink, loginLink);
+            
+            // Apply strong styling to ensure it's clickable
+            newLoginLink.style.cssText = `
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                text-decoration: none !important;
+                color: inherit !important;
+                pointer-events: auto !important;
+                z-index: 99999 !important;
+                position: relative !important;
+                cursor: pointer !important;
+                border-radius: 50% !important;
+                transition: all 0.3s ease !important;
+            `;
+            
+            // Add hover effect
+            newLoginLink.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            newLoginLink.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+                this.style.transform = 'scale(1)';
+            });
+            
+            // Ensure click works
+            newLoginLink.addEventListener('click', function(e) {
+                console.log("🔗 Login link clicked!");
+                // Don't prevent default - let the link work normally
+                window.location.href = 'login.php';
+            });
+            
+            console.log("✅ Login link fix applied successfully");
+            
+            // Test if it's working
+            console.log("🧪 Testing login link...");
+            console.log("  - href:", newLoginLink.href);
+            console.log("  - onclick:", newLoginLink.onclick);
+            console.log("  - style.pointerEvents:", newLoginLink.style.pointerEvents);
+            console.log("  - style.zIndex:", newLoginLink.style.zIndex);
+            
+        } else {
+            console.error("❌ Login link not found!");
+            
+            // Let's look for it differently
+            const allLinks = document.querySelectorAll('a[href="login.php"]');
+            const allUserButtons = document.querySelectorAll('.action-btn');
+            
+            console.log("🔍 Found links to login.php:", allLinks.length);
+            console.log("🔍 Found action buttons:", allUserButtons.length);
+            
+            allUserButtons.forEach((btn, index) => {
+                console.log(`  Button ${index + 1}:`, btn.outerHTML);
+            });
+            
+            // If we find any login link, fix it
+            if (allLinks.length > 0) {
+                allLinks.forEach((link, index) => {
+                    console.log(`🔧 Fixing login link ${index + 1}`);
+                    link.style.cssText = `
+                        pointer-events: auto !important;
+                        z-index: 99999 !important;
+                        position: relative !important;
+                        cursor: pointer !important;
+                    `;
+                    
+                    // Remove conflicting event listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        console.log("🔗 Alternative login link clicked!");
+                        window.location.href = 'login.php';
+                    });
+                });
+            }
+        }
+    }, 1000); // Wait 1 second for all scripts to load
+});
+
+// Additional fallback - create a manual click handler
+window.forceLoginRedirect = function() {
+    console.log("🚀 Force redirecting to login...");
+    window.location.href = 'login.php';
+};
+
+// Emergency fallback - if nothing works, you can type this in console: forceLoginRedirect()
+console.log("🆘 Emergency: If login still doesn't work, type: forceLoginRedirect()");
+
     </script>
 </body>
 </html>
