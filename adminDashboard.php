@@ -1787,11 +1787,6 @@ if ($xmlStatus['products']) {
 
 <body>
 
-<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
-
     <div class="admin-container">
         <div class="sidebar">
             <div class="sidebar-header">
@@ -4431,10 +4426,6 @@ if ($xmlStatus['products']) {
         function exportOrders() {
             alert('Export feature - this would generate a CSV/PDF of orders');
         }
-
-
-
-        
     </script>
 </body>
 
