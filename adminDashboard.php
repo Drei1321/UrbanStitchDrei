@@ -1792,6 +1792,10 @@ if ($xmlStatus['products']) {
                 <h2>Admin Panel</h2>
                 <p style="color: #ccc; font-size: 14px;">UrbanStitch</p>
             </div>
+            <button class="mobile-nav-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+</button>
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
             <ul class="sidebar-nav">
                 <li><a href="#dashboard" class="nav-link active" onclick="showSection('dashboard')">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
