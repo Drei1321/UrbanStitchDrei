@@ -2268,4 +2268,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('Enhanced UrbanStitch Admin System initialized with Size Management');
 });
+function toggleMobileMenu() {
+    document.querySelector('.sidebar').classList.toggle('mobile-open');
+    document.querySelector('.mobile-overlay').classList.toggle('active');
+    document.querySelector('.main-content').classList.toggle('sidebar-open');
+}
+
+function closeMobileMenu() {
+    document.querySelector('.sidebar').classList.remove('mobile-open');
+    document.querySelector('.mobile-overlay').classList.remove('active');
+    document.querySelector('.main-content').classList.remove('sidebar-open');
+}
 

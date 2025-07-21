@@ -1786,6 +1786,12 @@ if ($xmlStatus['products']) {
 </head>
 
 <body>
+
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
     <div class="admin-container">
         <div class="sidebar">
             <div class="sidebar-header">
