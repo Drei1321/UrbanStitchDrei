@@ -2892,3 +2892,119 @@ setTimeout(() => {
     }
 }, 1000);
 
+// ==========================================
+// LOADING SCREEN - IMMEDIATE EXECUTION
+// ==========================================
+
+// Execute immediately when script loads
+(function() {
+    console.log('🔄 Loading screen script executing...');
+    
+    // Find or create loading screen
+    let loadingScreen = document.getElementById('urbanstitch-loading-screen');
+    
+    if (!loadingScreen) {
+        console.log('Creating loading screen...');
+        // Create loading screen if it doesn't exist
+        loadingScreen = document.createElement('div');
+        loadingScreen.id = 'urbanstitch-loading-screen';
+        loadingScreen.innerHTML = `
+            <div class="loading-blob-container">
+                <div class="loading-blob"></div>
+                <div class="loading-blob-extra"></div>
+                <div class="loading-blob-extra"></div>
+                <div class="loading-blob-extra"></div>
+            </div>
+            <div class="loading-text">Urban<span>Stitch</span></div>
+            <div class="loading-subtitle">Loading your street fashion experience...</div>
+            <div class="loading-dots">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            </div>
+        `;
+        
+        // Insert at beginning of body
+        document.body.insertBefore(loadingScreen, document.body.firstChild);
+    }
+    
+    // Force show immediately
+    loadingScreen.style.cssText = `
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #1a1a1a !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 999999 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    `;
+    
+    document.body.style.overflow = 'hidden';
+    
+    console.log('✅ Loading screen shown');
+    
+    // Hide after page loads
+    let hideTimer;
+    let minTime = false;
+    
+    // Minimum 2 seconds
+    setTimeout(() => {
+        minTime = true;
+        console.log('⏰ Minimum time reached');
+        if (document.readyState === 'complete') {
+            hideLoadingScreen();
+        }
+    }, 2000);
+    
+    // When page fully loads
+    function checkPageLoad() {
+        if (document.readyState === 'complete' && minTime) {
+            hideLoadingScreen();
+        } else if (document.readyState === 'complete') {
+            console.log('📄 Page loaded, waiting for minimum time...');
+        }
+    }
+    
+    // Multiple event listeners to catch page load
+    window.addEventListener('load', checkPageLoad);
+    document.addEventListener('readystatechange', checkPageLoad);
+    
+    // Fallback timer
+    setTimeout(() => {
+        console.log('⏰ Fallback timer - forcing hide');
+        hideLoadingScreen();
+    }, 5000);
+    
+    function hideLoadingScreen() {
+        if (!loadingScreen) return;
+        
+        console.log('🚪 Hiding loading screen...');
+        
+        loadingScreen.style.transition = 'opacity 0.5s ease-out';
+        loadingScreen.style.opacity = '0';
+        document.body.style.overflow = '';
+        
+        setTimeout(() => {
+            if (loadingScreen && loadingScreen.parentNode) {
+                loadingScreen.style.display = 'none';
+                console.log('✅ Loading screen hidden');
+            }
+        }, 500);
+    }
+    
+    // Test function
+    window.showLoadingScreen = function() {
+        if (loadingScreen) {
+            loadingScreen.style.display = 'flex';
+            loadingScreen.style.opacity = '1';
+            console.log('🧪 Loading screen test activated');
+        }
+    };
+    
+})();
