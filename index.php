@@ -605,7 +605,22 @@ if (isLoggedIn()) {
     
 </head>
 <body>
-
+<!-- UrbanStitch Green Blob Loading Screen - Add right after <body> tag -->
+<div id="urbanstitch-loading-screen">
+    <div class="loading-blob-container">
+        <div class="loading-blob"></div>
+        <div class="loading-blob-extra"></div>
+        <div class="loading-blob-extra"></div>
+        <div class="loading-blob-extra"></div>
+    </div>
+    <div class="loading-text">Urban<span>Stitch</span></div>
+    <div class="loading-subtitle">Loading your street fashion experience...</div>
+    <div class="loading-dots">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+    </div>
+</div>
     <!-- Header -->
     <header class="header">
         <div class="top-banner">
