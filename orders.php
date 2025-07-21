@@ -747,7 +747,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     <li><a href="index.php?category=accessories" class="nav-link">ACCESSORIES</a></li>
                     <li><a href="index.php?category=winter-wear" class="nav-link">WINTER WEAR</a></li>
                     <li><a href="blog.php" class="nav-link">BLOG</a></li>
-                    <li><a href="offers.php" class="nav-link hot">HOT OFFERS</a></li>
                 </ul>
             </div>
         </nav>
