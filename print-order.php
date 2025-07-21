@@ -1,5 +1,5 @@
 <?php
-// Print Order Page - UrbanStitch E-commerce
+// Print Order Page - UrbanStitch E-commerce (Mobile Optimized)
 require_once 'config.php';
 
 // Enhanced error handling and debugging
@@ -257,8 +257,9 @@ $statusDisplay = getStatusDisplay($orderStatus);
         @media print {
             body {
                 margin: 0;
-                padding: 20px;
-                font-size: 12px;
+                padding: 15px;
+                font-size: 11px;
+                background: #fff !important;
             }
             
             .no-print {
@@ -270,15 +271,17 @@ $statusDisplay = getStatusDisplay($orderStatus);
             }
             
             .print-container {
-                margin: 0;
-                padding: 0;
-                box-shadow: none;
-                border: none;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                max-width: none !important;
+                background: #fff !important;
             }
             
             .invoice-header {
                 border-bottom: 2px solid #000;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
             
             .status-badge {
@@ -286,35 +289,45 @@ $statusDisplay = getStatusDisplay($orderStatus);
                 color: #000 !important;
                 background: #fff !important;
             }
+            
+            .mobile-item-card {
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
         }
 
         /* Screen styles */
         @media screen {
             body {
                 background: #f5f5f5;
-                padding: 20px;
+                padding: 10px;
             }
             
             .print-actions {
-                position: fixed;
-                top: 20px;
-                right: 20px;
+                position: sticky;
+                top: 10px;
                 z-index: 1000;
                 display: flex;
-                gap: 10px;
+                gap: 8px;
+                margin-bottom: 15px;
+                justify-content: center;
             }
             
             .btn {
-                padding: 10px 20px;
+                padding: 12px 16px;
                 border: none;
-                border-radius: 5px;
+                border-radius: 8px;
                 cursor: pointer;
                 font-weight: 600;
                 text-decoration: none;
                 display: inline-flex;
                 align-items: center;
-                gap: 8px;
+                gap: 6px;
                 transition: all 0.2s;
+                font-size: 14px;
+                flex: 1;
+                justify-content: center;
+                max-width: 150px;
             }
             
             .btn-print {
@@ -324,6 +337,7 @@ $statusDisplay = getStatusDisplay($orderStatus);
             
             .btn-print:hover {
                 background: #0056b3;
+                transform: translateY(-1px);
             }
             
             .btn-close {
@@ -333,30 +347,30 @@ $statusDisplay = getStatusDisplay($orderStatus);
             
             .btn-close:hover {
                 background: #545b62;
+                transform: translateY(-1px);
             }
         }
 
-        /* Invoice styles */
+        /* Invoice container */
         .print-container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 12px;
         }
 
+        /* Mobile-first header design */
         .invoice-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
+            text-align: center;
+            margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 2px solid #e9ecef;
         }
 
         .company-info h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 900;
             color: #1a1a1a;
             margin-bottom: 5px;
@@ -367,155 +381,291 @@ $statusDisplay = getStatusDisplay($orderStatus);
         }
 
         .company-tagline {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
             font-style: italic;
+            margin-bottom: 15px;
         }
 
-        .invoice-title {
-            text-align: right;
+        .company-contact {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .company-contact div {
+            margin-bottom: 3px;
         }
 
         .invoice-title h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .invoice-number {
-            font-size: 18px;
+            font-size: 16px;
             color: #666;
             margin-bottom: 5px;
+            font-weight: 600;
         }
 
         .invoice-date {
-            font-size: 14px;
+            font-size: 12px;
             color: #999;
+            margin-bottom: 10px;
         }
 
         .status-badge {
             display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
-            margin-top: 10px;
+            letter-spacing: 0.5px;
             border: 1px solid;
         }
 
+        /* Mobile-optimized details section */
         .order-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .detail-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
         }
 
         .detail-section h3 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #333;
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 8px;
         }
 
         .detail-item {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             flex-direction: column;
         }
 
         .detail-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .detail-value {
             font-size: 14px;
             color: #333;
             font-weight: 500;
+            word-wrap: break-word;
         }
 
-        .items-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Mobile-first items display */
+        .items-section {
             margin-bottom: 30px;
-            border: 1px solid #dee2e6;
         }
 
-        .items-table th {
-            background: #f8f9fa;
-            padding: 15px 10px;
-            text-align: left;
+        .items-section h3 {
+            font-size: 16px;
             font-weight: 700;
-            font-size: 12px;
+            color: #333;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 2px solid #dee2e6;
-            color: #495057;
-        }
-
-        .items-table td {
-            padding: 15px 10px;
-            border-bottom: 1px solid #dee2e6;
-            vertical-align: top;
-        }
-
-        .items-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .item-image {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 4px;
+            text-align: center;
+            padding: 15px;
             background: #f8f9fa;
+            border-radius: 8px;
         }
 
-        .item-name {
-            font-weight: 600;
+        /* Hide table on mobile, show cards */
+        .items-table {
+            display: none;
+        }
+
+        .mobile-items-container {
+            display: block;
+        }
+
+        .mobile-item-card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .mobile-item-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .mobile-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f8f9fa;
+            flex-shrink: 0;
+        }
+
+        .mobile-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mobile-item-name {
+            font-weight: 700;
             color: #333;
             margin-bottom: 4px;
+            font-size: 14px;
+            line-height: 1.3;
         }
 
-        .item-description {
+        .mobile-item-description {
             font-size: 12px;
             color: #666;
             line-height: 1.4;
+            margin-bottom: 8px;
         }
 
-        .text-right {
-            text-align: right;
+        .mobile-item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
         }
 
-        .text-center {
+        .mobile-item-qty {
             text-align: center;
         }
 
-        .font-weight-bold {
-            font-weight: 700;
+        .mobile-item-qty-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: block;
         }
 
+        .mobile-item-qty-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .mobile-item-price {
+            text-align: center;
+        }
+
+        .mobile-item-price-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: block;
+        }
+
+        .mobile-item-price-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .mobile-item-total {
+            text-align: center;
+        }
+
+        .mobile-item-total-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: block;
+        }
+
+        .mobile-item-total-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #00cc00;
+        }
+
+        .mobile-item-size {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Empty state */
+        .empty-items {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .empty-items i {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 16px;
+            opacity: 0.5;
+            color: #ccc;
+        }
+
+        /* Mobile-optimized totals */
         .totals-section {
-            margin-left: auto;
-            width: 300px;
             background: #f8f9fa;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid #dee2e6;
+            margin-bottom: 30px;
+        }
+
+        .totals-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
         }
 
         .total-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            align-items: center;
+            padding: 12px 0;
             border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
         }
 
         .total-row:last-child {
@@ -529,69 +679,220 @@ $statusDisplay = getStatusDisplay($orderStatus);
 
         .total-row.final {
             color: #00cc00;
+            background: #f0fff4;
+            padding: 15px;
+            margin: 15px -20px -20px -20px;
+            border-radius: 0 0 12px 12px;
         }
 
-        .footer-info {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            text-align: center;
-            color: #666;
-            font-size: 12px;
+        .total-row.final span:last-child {
+            font-size: 20px;
         }
 
-        .footer-info p {
-            margin-bottom: 5px;
-        }
-
+        /* Notes section */
         .notes-section {
-            margin-top: 30px;
+            margin-bottom: 30px;
             padding: 20px;
             background: #fff3cd;
             border-left: 4px solid #ffc107;
-            border-radius: 4px;
+            border-radius: 8px;
         }
 
         .notes-title {
             font-weight: 700;
             color: #856404;
             margin-bottom: 10px;
+            font-size: 14px;
         }
 
         .notes-content {
             color: #856404;
             line-height: 1.5;
+            font-size: 13px;
         }
 
-        /* Responsive design */
-        @media (max-width: 768px) {
+        /* Footer */
+        .footer-info {
+            text-align: center;
+            color: #666;
+            font-size: 11px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .footer-info p {
+            margin-bottom: 8px;
+        }
+
+        .footer-info strong {
+            color: #333;
+            font-size: 12px;
+        }
+
+        /* Tablet and desktop styles */
+        @media (min-width: 768px) {
             .print-container {
-                padding: 20px;
-                margin: 10px;
+                max-width: 800px;
+                padding: 40px;
             }
             
             .invoice-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .invoice-title {
+                text-align: right;
             }
             
             .order-details {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
             }
             
+            .company-info h1 {
+                font-size: 32px;
+            }
+            
+            .invoice-title h2 {
+                font-size: 28px;
+            }
+            
+            .print-actions {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                flex-direction: column;
+                width: auto;
+            }
+            
+            .btn {
+                max-width: none;
+                width: 160px;
+                flex: none;
+            }
+        }
+
+        /* Large desktop - show table instead of cards */
+        @media (min-width: 992px) {
             .items-table {
-                font-size: 12px;
-            }
-            
-            .items-table th,
-            .items-table td {
-                padding: 8px 5px;
-            }
-            
-            .totals-section {
+                display: table;
                 width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 30px;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .mobile-items-container {
+                display: none;
+            }
+
+            .items-table th {
+                background: #f8f9fa;
+                padding: 15px 12px;
+                text-align: left;
+                font-weight: 700;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-bottom: 2px solid #dee2e6;
+                color: #495057;
+            }
+
+            .items-table td {
+                padding: 15px 12px;
+                border-bottom: 1px solid #dee2e6;
+                vertical-align: top;
+            }
+
+            .items-table tr:last-child td {
+                border-bottom: none;
+            }
+
+            .item-image {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 6px;
+                background: #f8f9fa;
+            }
+
+            .item-name {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 4px;
+                font-size: 14px;
+            }
+
+            .item-description {
+                font-size: 12px;
+                color: #666;
+                line-height: 1.4;
+            }
+
+            .text-right {
+                text-align: right;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .font-weight-bold {
+                font-weight: 700;
+            }
+
+            .totals-section {
+                margin-left: auto;
+                width: 350px;
+            }
+        }
+
+        /* Animation for better UX */
+        .mobile-item-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        @media (hover: hover) {
+            .mobile-item-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .print-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .detail-section,
+            .mobile-item-card,
+            .totals-section {
+                border-width: 2px;
+                border-color: #000;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -599,26 +900,26 @@ $statusDisplay = getStatusDisplay($orderStatus);
 <body>
     <!-- Print Actions (only visible on screen) -->
     <div class="print-actions no-print">
-        <button class="btn btn-print" onclick="window.print()">
-            <i class="fas fa-print"></i>
-            Print Invoice
+        <button class="btn btn-print" onclick="window.print()" aria-label="Print this invoice">
+            <i class="fas fa-print" aria-hidden="true"></i>
+            Print
         </button>
-        <button class="btn btn-close" onclick="window.close()">
-            <i class="fas fa-times"></i>
+        <button class="btn btn-close" onclick="closeWindow()" aria-label="Close this window">
+            <i class="fas fa-times" aria-hidden="true"></i>
             Close
         </button>
     </div>
 
     <div class="print-container">
         <!-- Invoice Header -->
-        <div class="invoice-header">
+        <header class="invoice-header">
             <div class="company-info">
                 <h1>Urban<span>Stitch</span></h1>
                 <div class="company-tagline">Street Fashion & Urban Culture</div>
-                <div style="margin-top: 10px; font-size: 12px; color: #666;">
-                    <div><i class="fas fa-map-marker-alt"></i> Philippines</div>
-                    <div><i class="fas fa-envelope"></i> orders@urbanstitch.com</div>
-                    <div><i class="fas fa-phone"></i> +63 XXX XXX XXXX</div>
+                <div class="company-contact">
+                    <div><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Philippines</div>
+                    <div><i class="fas fa-envelope" aria-hidden="true"></i> orders@urbanstitch.com</div>
+                    <div><i class="fas fa-phone" aria-hidden="true"></i> +63 XXX XXX XXXX</div>
                 </div>
             </div>
             <div class="invoice-title">
@@ -629,12 +930,12 @@ $statusDisplay = getStatusDisplay($orderStatus);
                     <?php echo $statusDisplay['text']; ?>
                 </div>
             </div>
-        </div>
+        </header>
 
         <!-- Order Details -->
-        <div class="order-details">
+        <section class="order-details">
             <div class="detail-section">
-                <h3>Bill To</h3>
+                <h3><i class="fas fa-user" aria-hidden="true"></i> Bill To</h3>
                 <div class="detail-item">
                     <span class="detail-label">Customer Name</span>
                     <span class="detail-value"><?php echo htmlspecialchars($customerName); ?></span>
@@ -656,7 +957,7 @@ $statusDisplay = getStatusDisplay($orderStatus);
             </div>
 
             <div class="detail-section">
-                <h3>Order Information</h3>
+                <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Order Information</h3>
                 <div class="detail-item">
                     <span class="detail-label">Order Date</span>
                     <span class="detail-value"><?php echo date('F j, Y g:i A', strtotime($createdAt)); ?></span>
@@ -676,20 +977,67 @@ $statusDisplay = getStatusDisplay($orderStatus);
                 </div>
                 <?php endif; ?>
             </div>
-        </div>
+        </section>
 
-        <!-- Order Items Table -->
-        <table class="items-table">
-            <thead>
-                <tr>
-                    <th style="width: 60px;">Image</th>
-                    <th>Item Description</th>
-                    <th style="width: 80px;" class="text-center">Qty</th>
-                    <th style="width: 100px;" class="text-right">Unit Price</th>
-                    <th style="width: 100px;" class="text-right">Total</th>
-                </tr>
-            </thead>
-            <tbody>
+        <!-- Order Items Section -->
+        <section class="items-section">
+            <h3><i class="fas fa-shopping-bag" aria-hidden="true"></i> Order Items</h3>
+            
+            <!-- Desktop Table View -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Image</th>
+                        <th>Item Description</th>
+                        <th style="width: 80px;" class="text-center">Qty</th>
+                        <th style="width: 100px;" class="text-right">Unit Price</th>
+                        <th style="width: 100px;" class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($orderItems)): ?>
+                    <?php foreach ($orderItems as $item): 
+                        $itemName = isset($item['name']) ? $item['name'] : 'Product Name Not Available';
+                        $itemImage = isset($item['image_url']) ? $item['image_url'] : '';
+                        $itemDescription = isset($item['description']) ? $item['description'] : '';
+                        $itemQuantity = isset($item['quantity']) ? (int)$item['quantity'] : 1;
+                        $itemPrice = isset($item['price']) ? (float)$item['price'] : 0;
+                        $itemSize = isset($item['selected_size']) ? $item['selected_size'] : '';
+                    ?>
+                    <tr>
+                        <td class="text-center">
+                            <img src="<?php echo htmlspecialchars($itemImage ?: 'https://via.placeholder.com/50x50?text=No+Image'); ?>" 
+                                 alt="<?php echo htmlspecialchars($itemName); ?>" 
+                                 class="item-image"
+                                 onerror="this.src='https://via.placeholder.com/50x50?text=No+Image'">
+                        </td>
+                        <td>
+                            <div class="item-name"><?php echo htmlspecialchars($itemName); ?></div>
+                            <?php if (!empty($itemDescription)): ?>
+                            <div class="item-description"><?php echo htmlspecialchars(substr($itemDescription, 0, 100)) . (strlen($itemDescription) > 100 ? '...' : ''); ?></div>
+                            <?php endif; ?>
+                            <?php if (!empty($itemSize)): ?>
+                            <div class="item-description">Size: <?php echo htmlspecialchars($itemSize); ?></div>
+                            <?php endif; ?>
+                        </td>
+                        <td class="text-center font-weight-bold"><?php echo $itemQuantity; ?></td>
+                        <td class="text-right">₱<?php echo number_format($itemPrice, 2); ?></td>
+                        <td class="text-right font-weight-bold">₱<?php echo number_format($itemQuantity * $itemPrice, 2); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding: 40px; color: #666;">
+                            <i class="fas fa-box-open" style="font-size: 48px; display: block; margin-bottom: 16px; opacity: 0.5;"></i>
+                            No items found for this order
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
+            <!-- Mobile Card View -->
+            <div class="mobile-items-container">
                 <?php if (!empty($orderItems)): ?>
                 <?php foreach ($orderItems as $item): 
                     $itemName = isset($item['name']) ? $item['name'] : 'Product Name Not Available';
@@ -699,40 +1047,51 @@ $statusDisplay = getStatusDisplay($orderStatus);
                     $itemPrice = isset($item['price']) ? (float)$item['price'] : 0;
                     $itemSize = isset($item['selected_size']) ? $item['selected_size'] : '';
                 ?>
-                <tr>
-                    <td class="text-center">
-                        <img src="<?php echo htmlspecialchars($itemImage ?: 'https://via.placeholder.com/50x50?text=No+Image'); ?>" 
+                <div class="mobile-item-card">
+                    <div class="mobile-item-header">
+                        <img src="<?php echo htmlspecialchars($itemImage ?: 'https://via.placeholder.com/60x60?text=No+Image'); ?>" 
                              alt="<?php echo htmlspecialchars($itemName); ?>" 
-                             class="item-image"
-                             onerror="this.src='https://via.placeholder.com/50x50?text=No+Image'">
-                    </td>
-                    <td>
-                        <div class="item-name"><?php echo htmlspecialchars($itemName); ?></div>
-                        <?php if (!empty($itemDescription)): ?>
-                        <div class="item-description"><?php echo htmlspecialchars(substr($itemDescription, 0, 100)) . (strlen($itemDescription) > 100 ? '...' : ''); ?></div>
-                        <?php endif; ?>
-                        <?php if (!empty($itemSize)): ?>
-                        <div class="item-description">Size: <?php echo htmlspecialchars($itemSize); ?></div>
-                        <?php endif; ?>
-                    </td>
-                    <td class="text-center font-weight-bold"><?php echo $itemQuantity; ?></td>
-                    <td class="text-right">₱<?php echo number_format($itemPrice, 2); ?></td>
-                    <td class="text-right font-weight-bold">₱<?php echo number_format($itemQuantity * $itemPrice, 2); ?></td>
-                </tr>
+                             class="mobile-item-image"
+                             onerror="this.src='https://via.placeholder.com/60x60?text=No+Image'">
+                        <div class="mobile-item-info">
+                            <div class="mobile-item-name"><?php echo htmlspecialchars($itemName); ?></div>
+                            <?php if (!empty($itemDescription)): ?>
+                            <div class="mobile-item-description"><?php echo htmlspecialchars(substr($itemDescription, 0, 80)) . (strlen($itemDescription) > 80 ? '...' : ''); ?></div>
+                            <?php endif; ?>
+                            <?php if (!empty($itemSize)): ?>
+                            <span class="mobile-item-size">Size: <?php echo htmlspecialchars($itemSize); ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="mobile-item-details">
+                        <div class="mobile-item-qty">
+                            <span class="mobile-item-qty-label">Quantity</span>
+                            <span class="mobile-item-qty-value"><?php echo $itemQuantity; ?></span>
+                        </div>
+                        <div class="mobile-item-price">
+                            <span class="mobile-item-price-label">Unit Price</span>
+                            <span class="mobile-item-price-value">₱<?php echo number_format($itemPrice, 2); ?></span>
+                        </div>
+                        <div class="mobile-item-total">
+                            <span class="mobile-item-total-label">Total</span>
+                            <span class="mobile-item-total-value">₱<?php echo number_format($itemQuantity * $itemPrice, 2); ?></span>
+                        </div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
                 <?php else: ?>
-                <tr>
-                    <td colspan="5" class="text-center" style="padding: 40px; color: #666;">
-                        <i class="fas fa-box-open" style="font-size: 48px; display: block; margin-bottom: 16px; opacity: 0.5;"></i>
-                        No items found for this order
-                    </td>
-                </tr>
+                <div class="empty-items">
+                    <i class="fas fa-box-open" aria-hidden="true"></i>
+                    <p><strong>No items found for this order</strong></p>
+                    <p>Please contact support if this seems incorrect.</p>
+                </div>
                 <?php endif; ?>
-            </tbody>
-        </table>
+            </div>
+        </section>
 
         <!-- Order Totals -->
-        <div class="totals-section">
+        <section class="totals-section">
+            <div class="totals-title">Order Summary</div>
             <div class="total-row">
                 <span>Subtotal:</span>
                 <span>₱<?php echo number_format($subtotal, 2); ?></span>
@@ -756,21 +1115,21 @@ $statusDisplay = getStatusDisplay($orderStatus);
             </div>
             <?php endif; ?>
             <div class="total-row final">
-                <span>TOTAL:</span>
-                <span>₱<?php echo number_format($total, 2); ?></span>
+                <span><strong>TOTAL:</strong></span>
+                <span><strong>₱<?php echo number_format($total, 2); ?></strong></span>
             </div>
-        </div>
+        </section>
 
         <!-- Order Notes (if any) -->
         <?php if (!empty($adminNotes)): ?>
-        <div class="notes-section">
-            <div class="notes-title">Order Notes:</div>
+        <section class="notes-section">
+            <div class="notes-title"><i class="fas fa-sticky-note" aria-hidden="true"></i> Order Notes:</div>
             <div class="notes-content"><?php echo nl2br(htmlspecialchars($adminNotes)); ?></div>
-        </div>
+        </section>
         <?php endif; ?>
 
         <!-- Footer Information -->
-        <div class="footer-info">
+        <footer class="footer-info">
             <p><strong>Thank you for shopping with UrbanStitch!</strong></p>
             <p>For questions about your order, please contact us at orders@urbanstitch.com</p>
             <p>This is a computer-generated invoice and does not require a signature.</p>
@@ -779,37 +1138,117 @@ $statusDisplay = getStatusDisplay($orderStatus);
                 UrbanStitch &copy; <?php echo date('Y'); ?> | 
                 All Rights Reserved
             </p>
-        </div>
+        </footer>
     </div>
 
     <script>
-        // Auto-print when page loads (optional)
-        // window.onload = function() { window.print(); };
+        // Enhanced mobile-friendly JavaScript
         
-        // Handle print button click
+        // Print functionality
         function printInvoice() {
-            window.print();
+            // Add small delay for better mobile performance
+            setTimeout(() => {
+                window.print();
+            }, 100);
         }
         
-        // Handle close button click
+        // Close window functionality
         function closeWindow() {
             if (window.opener) {
                 window.close();
             } else {
-                window.history.back();
+                // Fallback for mobile browsers
+                if (history.length > 1) {
+                    window.history.back();
+                } else {
+                    // If no history, try to redirect to orders page
+                    window.location.href = 'orders.php';
+                }
             }
         }
         
-        // Keyboard shortcuts
+        // Enhanced keyboard shortcuts
         document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'p') {
+            // Ctrl+P or Cmd+P for print
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
                 e.preventDefault();
-                window.print();
+                printInvoice();
             }
+            // Escape key to close
             if (e.key === 'Escape') {
                 closeWindow();
             }
         });
+
+        // Touch-friendly enhancements
+        if ('ontouchstart' in window) {
+            // Add touch feedback to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                button.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 100);
+                });
+            });
+        }
+
+        // Image loading optimization for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img[src*="placeholder"]');
+            images.forEach(img => {
+                img.style.backgroundColor = '#f8f9fa';
+                img.style.display = 'flex';
+                img.style.alignItems = 'center';
+                img.style.justifyContent = 'center';
+                img.style.fontSize = '10px';
+                img.style.color = '#666';
+            });
+        });
+
+        // Handle orientation change on mobile
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Force a reflow to handle any layout issues
+                document.body.style.display = 'none';
+                document.body.offsetHeight; // trigger reflow
+                document.body.style.display = '';
+            }, 100);
+        });
+
+        // Prevent zoom on double tap for better UX
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Add print media query detection
+        if (window.matchMedia) {
+            const mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    // Before print
+                    document.body.classList.add('printing');
+                } else {
+                    // After print
+                    document.body.classList.remove('printing');
+                }
+            });
+        }
+
+        // Service Worker registration for offline capability (optional)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(function() {
+                // Service worker registration failed - no problem for this page
+            });
+        }
     </script>
 </body>
 </html>
