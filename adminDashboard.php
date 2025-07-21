@@ -4431,6 +4431,56 @@ if ($xmlStatus['products']) {
         function exportOrders() {
             alert('Export feature - this would generate a CSV/PDF of orders');
         }
+
+function toggleMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.mobile-overlay');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (!sidebar || !overlay || !mainContent) {
+        console.error('Mobile menu elements not found');
+        return;
+    }
+    
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+    mainContent.classList.toggle('sidebar-open');
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.mobile-overlay');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (sidebar) sidebar.classList.remove('mobile-open');
+    if (overlay) overlay.classList.remove('active');
+    if (mainContent) mainContent.classList.remove('sidebar-open');
+    
+    document.body.style.overflow = '';
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-close menu when clicking sidebar links
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            setTimeout(closeMobileMenu, 100);
+        });
+    });
+    
+    // Close menu on window resize to desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1024) {
+            closeMobileMenu();
+        }
+    });
+});
+
+
     </script>
 </body>
 
