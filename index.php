@@ -606,7 +606,21 @@ if (isLoggedIn()) {
 </head>
 <body>
 
-
+ <div id="urbanstitch-loading-screen">
+        <div class="loading-blob-container">
+            <div class="loading-blob"></div>
+        </div>
+        <div class="loading-text">Urban<span>Stitch</span></div>
+        <div class="loading-subtitle">Loading your street fashion experience...</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
+        </div>
+        <div class="loading-dots">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </div>
+    </div>
     <!-- Header -->
     <header class="header">
         <div class="top-banner">
